@@ -5,15 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="63dp"
+                android:layout_marginTop="20dp"
                 android:elevation="0dp"
                 app:cardElevation="8dp"
                 app:cardCornerRadius="4dp"
@@ -32,32 +38,17 @@
 
                         <TextView
                             android:id="@+id/signin"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="50"
-                            android:background="@color/teal_200"
-                            android:paddingTop="12dp"
-                            android:paddingBottom="12dp"
-                            android:text="SignIn"
+                            android:background="@color/grey"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Sign In"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <Button
-                            android:id="@+id/signup"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="12dp"
-                            android:paddingBottom="12dp"
-                            android:text="SignUp"
-                            android:textAlignment="center"
-                            android:textColor="@color/teal_200"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
+                            android:textSize="25sp" />
 
                     </LinearLayout>
 
@@ -69,16 +60,12 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <TextView
-                            android:id="@+id/signin_signup_txt"
+                        <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Sign in"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="24dp"
-                            android:textStyle="bold"
-                            android:gravity="center_horizontal" />
+                            android:layout_height="100dp"
+                            app:srcCompat= "@drawable/indian_institute_of_technology__patna_svg"
+                            android:contentDescription="IITP Logo">
+                        </ImageView>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -87,9 +74,9 @@
 
                             <EditText
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:drawablePadding="16dp"
-                                android:drawableStart="@drawable/my_project"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="15dp"
+                                android:drawableStart="@drawable/email_icon_1"
                                 android:scaleType="fitXY"
                                 android:hint="Email"
                                 android:inputType="textEmailAddress"
@@ -120,14 +107,13 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
-                            android:id="@+id/signin_signup_btn"
+                            android:id="@+id/signin_btn"
                             android:layout_width="150dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:layout_marginBottom="16dp"
                             android:layout_marginTop="24dp"
-                            android:background="@drawable/button"
-                            android:drawableStart="@drawable/touch"
+                            android:backgroundTint="#3C4048"
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
                             android:text="Sign In"
@@ -141,12 +127,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="32dp"
+                            android:gravity="center_horizontal"
                             android:text="Forgot your password?"
                             android:textAlignment="center"
                             android:textColor="#4f4f4f"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:gravity="center_horizontal" />
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/signup_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="50"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:text="Sign Up"
+                            android:backgroundTint="@color/grey"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -155,5 +156,5 @@
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
-
+    </ScrollView>
 </RelativeLayout>
