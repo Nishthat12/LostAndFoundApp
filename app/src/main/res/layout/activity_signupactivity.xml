@@ -28,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/indian_institute_of_technology__patna_svg"></ImageView>
+        android:src="@drawable/indian_institute_of_technology__patna_svg">
+    </ImageView>
 
     <ScrollView
         android:layout_width="match_parent"

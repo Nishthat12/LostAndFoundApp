@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         Signin_btn = findViewById(R.id.signin_btn)
+        Signin_btn.setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

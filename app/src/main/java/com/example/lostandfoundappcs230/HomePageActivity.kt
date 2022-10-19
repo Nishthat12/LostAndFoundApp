@@ -7,31 +7,38 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class ThirdActivity : AppCompatActivity() {
+class HomePageActivity : AppCompatActivity() {
     // define the global variable
-    private lateinit var question3: TextView
-    // Add button Move previous activity
-    private lateinit var previous_button: Button
+    private lateinit var postlost: Button
+    private lateinit var postfound: Button
+    private lateinit var feedlost: Button
+    private lateinit var feedfound: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_thirdactivity)
+        setContentView(R.layout.activity_homepageactivity)
 
         // by ID we can use each component which id is assign in xml
         // file use findViewById() to get the Button and textview.
-        previous_button = findViewById(R.id.third_activity_previous_button)
-        question3 = findViewById(R.id.question3_id)
+        postlost = findViewById(R.id.PostLostCard)
+        postfound = findViewById(R.id.PostFoundCard)
+        feedlost = findViewById(R.id.FeedLostCard)
+        feedfound = findViewById(R.id.FeedFoundCard)
 
-        // In question1 get the TextView use by findViewById()
-        // In TextView set question Answer for message
-        question3.text = "Q3 - How to store heavy structured data in android? Ans - SQlite database ".trimIndent()
-
-        // Add_button add clicklistener
-        previous_button.setOnClickListener {
-            // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
-            // the components you are targeting. Intent to start an activity called SignUpActivity with the following code:
-            val intent = Intent(this, SignUpActivity::class.java)
-            // start the activity connect to the specified class
+        postlost.setOnClickListener{
+            val intent = Intent(this, Lost_FoundActivity::class.java)
+            startActivity(intent)
+        }
+        postfound.setOnClickListener{
+            val intent = Intent(this, Lost_FoundActivity::class.java)
+            startActivity(intent)
+        }
+        feedlost.setOnClickListener{
+            val intent = Intent(this, LostFeedActivity::class.java)
+            startActivity(intent)
+        }
+        feedfound.setOnClickListener{
+            val intent = Intent(this, FoundFeedActivity::class.java)
             startActivity(intent)
         }
     }
