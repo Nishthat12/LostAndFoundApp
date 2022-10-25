@@ -3,20 +3,26 @@ package com.example.lostandfoundappcs230
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+
+
 
     // define the global variable
     // Add button Move to Activity
     private lateinit var Signup_btn: Button
     private lateinit var Signin_btn: Button
 
+
     @SuppressLint("CutPasteId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)//will hide the title
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide() //hide the title bar
 
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button

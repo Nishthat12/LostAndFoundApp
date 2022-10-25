@@ -4,7 +4,6 @@ package com.example.lostandfoundappcs230
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class HomePageActivity : AppCompatActivity() {
@@ -17,6 +16,7 @@ class HomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepageactivity)
+        supportActionBar?.hide(); //hide the title bar
 
         // by ID we can use each component which id is assign in xml
         // file use findViewById() to get the Button and textview.
@@ -26,11 +26,11 @@ class HomePageActivity : AppCompatActivity() {
         feedfound = findViewById(R.id.FeedFoundCard)
 
         postlost.setOnClickListener{
-            val intent = Intent(this, Lost_FoundActivity::class.java)
+            val intent = Intent(this, Post_LostActivity::class.java)
             startActivity(intent)
         }
         postfound.setOnClickListener{
-            val intent = Intent(this, Lost_FoundActivity::class.java)
+            val intent = Intent(this, Post_FoundActivity::class.java)
             startActivity(intent)
         }
         feedlost.setOnClickListener{

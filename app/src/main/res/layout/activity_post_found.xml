@@ -30,14 +30,14 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/linearLayout1"
+                        android:id="@+id/PostFoundLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:weightSum="100">
 
                         <TextView
-                            android:id="@+id/signin"
+                            android:id="@+id/post_found"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -45,7 +45,7 @@
                             android:background="@color/darkest_shade"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
-                            android:text="Sign In"
+                            android:text="Post For Found Item"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="25sp" />
@@ -53,21 +53,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linearLayout2"
+                        android:id="@+id/PostFoundLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/linearLayout1"
+                        android:layout_below="@id/PostFoundLayout"
                         android:orientation="vertical"
                         android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:baselineAligned="false"
-                            android:contentDescription="IITP Logo"
-                            app:srcCompat="@drawable/indian_institute_of_technology__patna_svg">
-
-                        </ImageView>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -75,12 +66,12 @@
                             android:layout_marginTop="16dp">
 
                             <EditText
+                                android:id="@+id/post_found_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:autofillHints="Email"
-                                android:drawableStart="@drawable/email_icon_1"
+                                android:autofillHints="Name"
                                 android:drawablePadding="15dp"
-                                android:hint="Email"
+                                android:hint="Name"
                                 android:inputType="textEmailAddress"
                                 android:maxLines="1"
                                 android:paddingStart="8dp"
@@ -92,60 +83,96 @@
                                 tools:text="@tools:sample/cities" />
                         </com.google.android.material.textfield.TextInputLayout>
 
+
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            app:passwordToggleEnabled="true">
+                            android:layout_marginTop="16dp">
 
                             <EditText
-                                android:id="@+id/password"
+                                android:id="@+id/post_found_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:autofillHints="Password"
-                                android:drawableStart="@drawable/my_project_1__1_"
+                                android:autofillHints="Phone Number"
                                 android:drawablePadding="16dp"
-                                android:hint="Password"
-                                android:paddingTop="12dp"
-                                android:paddingBottom="1dp"
-                                android:inputType="textPassword"
+                                android:hint="Phone Number"
+                                android:inputType="number"
                                 android:maxLines="1"
                                 android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                tools:text="@tools:sample/cities" />
+                                tools:text="@tools:sample/us_phones" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <Button
-                            android:id="@+id/signin_btn"
-                            android:layout_width="150dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginBottom="16dp"
-                            android:backgroundTint="@color/darkest_shade"
-                            android:paddingLeft="16dp"
-                            android:paddingRight="16dp"
-                            android:text="Sign In"
-                            android:textAllCaps="false"
-                            android:textColor="#fff"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/forgot_password"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="32dp"
-                            android:gravity="center_horizontal"
-                            android:text="Forgot your password?"
-                            android:textAlignment="center"
-                            android:textColor="#4f4f4f"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="16dp">
 
+                            <EditText
+                                android:id="@+id/post_found_message"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:autofillHints="Message"
+                                android:drawablePadding="16dp"
+                                android:hint="Message"
+                                android:inputType="textMultiLine"
+                                android:maxLines="3"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                tools:text="@tools:sample/lorem/random" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <EditText
+                                android:id="@+id/post_found_where"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:autofillHints="Message"
+                                android:drawablePadding="16dp"
+                                android:hint="Where found?"
+                                android:inputType="textMultiLine"
+                                android:maxLines="3"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                tools:text="@tools:sample/lorem/random" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <EditText
+                                android:id="@+id/post_found_photo"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:autofillHints="Message"
+                                android:drawablePadding="16dp"
+                                android:hint="Post Photo"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
                         <Button
-                            android:id="@+id/signup_btn"
+                            android:id="@+id/post_found_submit"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="50"
@@ -153,10 +180,11 @@
                             android:gravity="center_horizontal"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
-                            android:text="Sign Up"
+                            android:text="Submit"
                             android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="16sp"
+                            android:layout_marginTop="20dp"
                             android:textStyle="bold" />
 
                     </LinearLayout>

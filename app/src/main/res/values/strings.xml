@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Lost And Found App CS230</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="iitp_logo">IITP Logo</string>
+    <string name="name">Name</string>
+    <string name="roll_no">Roll No.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="post_for_n_lost_items">Post for\n Lost Items</string>
+    <string name="post_for_n_found_items">Post for\n Found Items</string>
+    <string name="check_feed_nof_lost_items">Check Feed \nof Lost Items</string>
+    <string name="check_feed_nof_found_items">Check Feed \nof found Items</string>
 </resources>

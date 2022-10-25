@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="night_alternate_lightest">#A5C9CA</color>
+    <color name="night_darkest">#2C3333</color>
+    <color name="night_lightest">#E7F6F2</color>
+    <color name="night_alternate_darkest">#395B64</color>
+</resources>
