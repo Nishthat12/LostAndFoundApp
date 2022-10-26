@@ -84,7 +84,6 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
 
-
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -171,7 +170,7 @@
                                 android:textSize="16sp" />
                         </com.google.android.material.textfield.TextInputLayout>
                         <Button
-                            android:id="@+id/post_lost_submit"
+                            android:id="@+id/Btn_post_lost_submit"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="50"

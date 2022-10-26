@@ -30,7 +30,6 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        val uid = firebaseAuth.currentUser?.uid
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         binding.btRegister.setOnClickListener {
@@ -42,66 +41,75 @@ class SignUpActivity : AppCompatActivity() {
             val contactNumber = binding.etNumber.text.toString()
 
             val user = User(name, rollNumber, email, password, contactNumber)
-            if (uid != null) {
-                databaseReference.child(uid).setValue(user).addOnCompleteListener {
 
-                    if (it.isSuccessful) {
-                        if (email.endsWith(emailString)) {
-                            if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty()) {
-                                if (password == repassword) {
-                                    firebaseAuth.createUserWithEmailAndPassword(email, password)
-                                        .addOnCompleteListener {
-                                            if (it.isSuccessful) {
-                                                firebaseAuth.currentUser?.sendEmailVerification()
-                                                    ?.addOnSuccessListener {
-                                                        Toast.makeText(
-                                                            this,
-                                                            "Please verify your email!",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
-                                                        val intent =
-                                                            Intent(this, MainActivity::class.java)
-                                                        startActivity(intent)
-                                                    }
-                                                    ?.addOnFailureListener {
-                                                        Toast.makeText(
-                                                            this,
-                                                            it.toString(),
-                                                            Toast.LENGTH_SHORT
-                                                        )
-                                                            .show()
-                                                    }
-                                            } else {
-                                                Toast.makeText(
-                                                    this,
-                                                    it.exception.toString(),
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+            if (email.endsWith(emailString)) {
+                if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty()) {
+                    if (password == repassword) {
+                        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    val uid = firebaseAuth.currentUser?.uid
+
+                                    if (uid != null) {
+                                        databaseReference.child(uid).setValue(user)
+                                            .addOnCompleteListener {
+
+                                                if (it.isSuccessful) {
+
+                                                } else {
+                                                    Toast.makeText(
+                                                        this,
+                                                        "Failed to Register",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
                                             }
+                                    }
+                                    firebaseAuth.currentUser?.sendEmailVerification()
+                                        ?.addOnSuccessListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Please verify your email!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            val intent =
+                                                Intent(this, MainActivity::class.java)
+                                            startActivity(intent)
+                                        }
+                                        ?.addOnFailureListener {
+                                            Toast.makeText(
+                                                this,
+                                                it.toString(),
+                                                Toast.LENGTH_SHORT
+                                            )
+                                                .show()
                                         }
                                 } else {
                                     Toast.makeText(
                                         this,
-                                        "Password is not matching",
+                                        it.exception.toString(),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
-                            } else {
-                                Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT)
-                                    .show()
                             }
-                        } else {
-                            Toast.makeText(
-                                this,
-                                "Use your IITP Webmail address only",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
                     } else {
-                        Toast.makeText(this, "Failed to Register", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Password is not matching",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+                } else {
+                    Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT)
+                        .show()
                 }
+            } else {
+                Toast.makeText(
+                    this,
+                    "Use your IITP Webmail address only",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             }
 //        }
         }
