@@ -75,6 +75,7 @@
                             android:layout_marginTop="16dp">
 
                             <EditText
+                                android:id="@+id/et_login_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:autofillHints="Email"
@@ -99,7 +100,7 @@
                             app:passwordToggleEnabled="true">
 
                             <EditText
-                                android:id="@+id/password"
+                                android:id="@+id/et_login_password"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:autofillHints="Password"
