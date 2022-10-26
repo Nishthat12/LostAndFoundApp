@@ -2,12 +2,9 @@ package com.example.lostandfoundappcs230
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lostandfoundappcs230.databinding.ActivityMainBinding
 import com.example.lostandfoundappcs230.databinding.ActivitySignupactivityBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -18,65 +15,96 @@ class SignUpActivity : AppCompatActivity() {
     // define the global variable
     // Add button Move to next Activity and previous Activity
     private lateinit var binding: ActivitySignupactivityBinding //binding
-    private lateinit var database: DatabaseReference
-    private lateinit var signup_btn: Button
+    private lateinit var databaseReference: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
 //    private lateinit var previous_button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-//        setContentView(R.layout.activity_signupactivity)
+        requestWindowFeature(Window.FEATURE_NO_TITLE) //will hide the title
         supportActionBar?.hide() //hide the title bar
 
+        super.onCreate(savedInstanceState)
+        val emailString = "@iitp.ac.in"
         binding = ActivitySignupactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        val uid = firebaseAuth.currentUser?.uid
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         binding.btRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             val repassword = binding.etRepeatPassword.text.toString()
+            val name = binding.etName.text.toString()
+            val rollNumber = binding.etRollno.text.toString()
+            val contactNumber = binding.etNumber.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty()) {
-                if (password == repassword) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                val intent = Intent(this, MainActivity::class.java)
-                                startActivity(intent)
+            val user = User(name, rollNumber, email, password, contactNumber)
+            if (uid != null) {
+                databaseReference.child(uid).setValue(user).addOnCompleteListener {
+
+                    if (it.isSuccessful) {
+                        if (email.endsWith(emailString)) {
+                            if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty()) {
+                                if (password == repassword) {
+                                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                                        .addOnCompleteListener {
+                                            if (it.isSuccessful) {
+                                                firebaseAuth.currentUser?.sendEmailVerification()
+                                                    ?.addOnSuccessListener {
+                                                        Toast.makeText(
+                                                            this,
+                                                            "Please verify your email!",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                        val intent =
+                                                            Intent(this, MainActivity::class.java)
+                                                        startActivity(intent)
+                                                    }
+                                                    ?.addOnFailureListener {
+                                                        Toast.makeText(
+                                                            this,
+                                                            it.toString(),
+                                                            Toast.LENGTH_SHORT
+                                                        )
+                                                            .show()
+                                                    }
+                                            } else {
+                                                Toast.makeText(
+                                                    this,
+                                                    it.exception.toString(),
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        }
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        "Password is not matching",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             } else {
-                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT)
+                                    .show()
                             }
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Use your IITP Webmail address only",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
                         }
-                } else {
-                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Failed to Register", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            } else {
-                Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show()
             }
+//        }
         }
-
-        // by ID we can use each component which id is assign in xml
-        // file use findViewById() to get the both Button and textview
-        signup_btn = findViewById(R.id.bt_register)
-
-//        signup_btn.setOnClickListener {
-//            // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
-//            // the components you are targeting. Intent to start an activity called ThirdActivity with the following code.
-//            val intent = Intent(this, HomePageActivity::class.java)
-//            // start the activity connect to the specified class
-//            startActivity(intent)
-//        }
-//        // Add_button add clicklistener
-//        previous_button.setOnClickListener {
-//            // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
-//            // the components you are targeting. Intent to start an activity called oneActivity with the following code
-//            val intent = Intent(this, MainActivity::class.java)
-//            // start the activity connect to the specified class
-//            startActivity(intent)
-//        }
     }
 }
 

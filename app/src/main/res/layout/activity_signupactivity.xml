@@ -55,7 +55,7 @@
                  app:layout_constraintWidth_percent="0.7">
 
                  <EditText
-                     android:id="@+id/name"
+                     android:id="@+id/et_name"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:autofillHints="Name"

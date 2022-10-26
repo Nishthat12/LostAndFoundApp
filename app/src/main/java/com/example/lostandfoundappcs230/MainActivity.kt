@@ -3,10 +3,8 @@ package com.example.lostandfoundappcs230
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.Window
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lostandfoundappcs230.databinding.ActivityMainBinding
@@ -14,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var  binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var Signup_btn: Button
     private lateinit var Signin_btn: Button
@@ -22,11 +20,9 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CutPasteId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE) //will hide the title
-        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
         supportActionBar?.hide() //hide the title bar
 
-
+        super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -47,20 +43,27 @@ class MainActivity : AppCompatActivity() {
             val email = binding.etLoginEmail.text.toString()
             val password = binding.etLoginPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty() ) {
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val verification = firebaseAuth.currentUser?.isEmailVerified
+                            if (verification == true) {
                                 val intent = Intent(this, HomePageActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT)
+                                    .show()
                             }
+                        } else {
+                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                         }
+                    }
             } else {
                 Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show()
-            } }
+            }
+        }
 
     }
 }
