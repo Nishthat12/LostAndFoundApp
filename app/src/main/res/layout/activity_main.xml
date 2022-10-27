@@ -65,7 +65,7 @@
                             android:layout_height="100dp"
                             android:baselineAligned="false"
                             android:contentDescription="IITP Logo"
-                            app:srcCompat="@drawable/indian_institute_of_technology__patna_svg">
+                            app:srcCompat="@drawable/lost_and_found__1_">
 
                         </ImageView>
 

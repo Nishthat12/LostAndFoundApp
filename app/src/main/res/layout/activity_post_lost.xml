@@ -21,8 +21,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:elevation="0dp"
-                app:cardElevation="8dp"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="8dp"
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
@@ -45,7 +45,7 @@
                             android:background="@color/darkest_shade"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
-                            android:text="Post For Lost Item"
+                            android:text="@string/post_for_lost_item"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="25sp" />
@@ -71,7 +71,7 @@
                                 android:layout_height="60dp"
                                 android:autofillHints="Name"
                                 android:drawablePadding="15dp"
-                                android:hint="Name"
+                                android:hint="@string/name"
                                 android:inputType="textEmailAddress"
                                 android:maxLines="1"
                                 android:paddingStart="8dp"
@@ -118,8 +118,8 @@
                                 android:autofillHints="Message"
                                 android:drawablePadding="16dp"
                                 android:hint="Message"
-                                android:maxLines="3"
                                 android:inputType="textMultiLine"
+                                android:maxLines="3"
                                 android:paddingStart="8dp"
                                 android:paddingTop="12dp"
                                 android:paddingBottom="1dp"
@@ -150,29 +150,76 @@
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <Button
+                            android:id="@+id/post_lost_select"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp">
+                            android:layout_height="60dp"
+                            android:layout_marginTop="13dp"
+                            android:backgroundTint="@color/lightest_shade"
+                            android:drawablePadding="16dp"
+                            android:text="Select Images (max 5)"
+                            android:paddingStart="8dp"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fillViewport="true"
+                        android:scrollbars="horizontal|vertical">
+                        <LinearLayout
+                            android:id="@+id/photos_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp">
 
-                            <EditText
-                                android:id="@+id/post_lost_photo"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:autofillHints="Message"
-                                android:drawablePadding="16dp"
-                                android:hint="Post Photo"
-                                android:inputType="number"
-                                android:paddingStart="8dp"
-                                android:paddingTop="12dp"
-                                android:paddingBottom="1dp"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <ImageView
+                                android:id="@+id/image1"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/addmoreimage"
+                                />
+
+                            <ImageView
+                                android:id="@+id/image2"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent" />
+
+                            <ImageView
+                                android:id="@+id/image3"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"/>
+
+                            <ImageView
+                                android:id="@+id/image4"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent" />
+                            <ImageView
+                                android:id="@+id/image5"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                        <Button
+                            android:id="@+id/post_lost_photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="13dp"
+                            android:backgroundTint="@color/lightest_shade"
+                            android:drawablePadding="16dp"
+                            android:hint="Post Images"
+                            android:paddingStart="8dp"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:textColor="#fff"
+                            android:textColorHint="@color/black"
+                            android:textSize="16sp" />
                         <Button
                             android:id="@+id/Btn_post_lost_submit"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:layout_marginTop="20dp"
                             android:layout_weight="50"
                             android:backgroundTint="@color/darkest_shade"
                             android:gravity="center_horizontal"
@@ -182,7 +229,6 @@
                             android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="16sp"
-                            android:layout_marginTop="20dp"
                             android:textStyle="bold" />
 
                     </LinearLayout>

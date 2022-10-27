@@ -13,4 +13,5 @@
     <string name="post_for_n_found_items">Post for\n Found Items</string>
     <string name="check_feed_nof_lost_items">Check Feed \nof Lost Items</string>
     <string name="check_feed_nof_found_items">Check Feed \nof found Items</string>
+    <string name="post_for_lost_item">Post For Lost Item</string>
 </resources>
