@@ -1,6 +1,8 @@
 package com.example.lostandfoundappcs230
 
+import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
@@ -9,6 +11,9 @@ import com.example.lostandfoundappcs230.databinding.ActivitySignupactivityBindin
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -17,7 +22,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupactivityBinding //binding
     private lateinit var databaseReference: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
-//    private lateinit var previous_button: Button
+    private lateinit var profileUri: Uri
+    private lateinit var storage: FirebaseStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,7 +36,12 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        storage = FirebaseStorage.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
+        binding.btProfile.setOnClickListener {
+            selectImage()
+        }
 
         binding.btRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -39,6 +50,8 @@ class SignUpActivity : AppCompatActivity() {
             val name = binding.etName.text.toString()
             val rollNumber = binding.etRollno.text.toString()
             val contactNumber = binding.etNumber.text.toString()
+
+            uploadImage()
 
             val user = User(name, rollNumber, email, password, contactNumber)
 
@@ -112,6 +125,41 @@ class SignUpActivity : AppCompatActivity() {
                     .show()
             }
 //        }
+        }
+    }
+
+    private fun uploadImage() {
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Uploading Image...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+        val storage = FirebaseStorage.getInstance().getReference("images/$userID/profilePic")
+        storage.putFile(profileUri)
+            .addOnSuccessListener {
+                Toast.makeText(this@SignUpActivity, "Image uploaded", Toast.LENGTH_SHORT).show()
+                if (progressDialog.isShowing) progressDialog.dismiss()
+            }.addOnFailureListener {
+                Toast.makeText(this@SignUpActivity, "Failed", Toast.LENGTH_SHORT).show()
+                if (progressDialog.isShowing) progressDialog.dismiss()
+            }
+    }
+
+    private fun selectImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            profileUri = data?.data!!
+            binding.profileImg.setImageURI(profileUri)
         }
     }
 }

@@ -170,7 +170,7 @@
                         android:fillViewport="true"
                         android:scrollbars="horizontal|vertical">
                         <LinearLayout
-                            android:id="@+id/photos_horizontal"
+                            android:id = "@+id/photos_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="100dp">
 
@@ -178,27 +178,31 @@
                                 android:id="@+id/image1"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/addmoreimage"
+                                android:src="@drawable/resource_new"
                                 />
 
                             <ImageView
                                 android:id="@+id/image2"
                                 android:layout_width="100dp"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:src="@drawable/resource_new"/>
 
                             <ImageView
                                 android:id="@+id/image3"
                                 android:layout_width="100dp"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:src="@drawable/resource_new"/>
 
                             <ImageView
                                 android:id="@+id/image4"
                                 android:layout_width="100dp"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:src="@drawable/resource_new"/>
                             <ImageView
                                 android:id="@+id/image5"
                                 android:layout_width="100dp"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:src="@drawable/resource_new"/>
                         </LinearLayout>
                     </HorizontalScrollView>
                         <Button

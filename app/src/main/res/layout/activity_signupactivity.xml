@@ -24,13 +24,30 @@
         android:layout_marginTop="15dp"
         />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/lost_and_found__1_"
-        android:contentDescription="@string/iitp_logo">
-    </ImageView>
+     <androidx.cardview.widget.CardView
+         android:layout_width="80dp"
+         android:layout_height="80dp"
+         app:cardCornerRadius="1000dp"
+         app:cardBackgroundColor="@color/white"
+         android:layout_marginTop="50dp"
+         android:layout_marginStart="170dp">
+
+         <androidx.cardview.widget.CardView
+             android:layout_width="75dp"
+             android:layout_height="75dp"
+             app:cardCornerRadius="100dp"
+             android:layout_gravity="center">
+
+             <ImageView
+                 android:id="@+id/profile_img"
+                 android:layout_width="75dp"
+                 android:layout_height="75dp"
+                 android:src="@drawable/user_image_with_black_background"
+                 android:scaleType="centerCrop"/>
+
+         </androidx.cardview.widget.CardView>
+
+     </androidx.cardview.widget.CardView>
 
      <ScrollView
          android:layout_width="match_parent"
@@ -47,7 +64,7 @@
                  android:id="@+id/layout_name"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
-                 android:layout_marginTop="120dp"
+                 android:layout_marginTop="140dp"
                  android:textColorHint="@color/black"
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
@@ -208,20 +225,37 @@
              </com.google.android.material.textfield.TextInputLayout>
 
              <Button
+                 android:id="@+id/bt_profile"
+                 android:layout_width="0dp"
+                 android:layout_height="50dp"
+                 android:layout_marginTop="16dp"
+                 android:backgroundTint="@color/lightest_shade"
+                 android:elevation="2dp"
+                 android:text="Upload Profile Image"
+                 android:textAllCaps="false"
+                 android:textColor="@color/black"
+                 android:textSize="15sp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintHorizontal_bias="0.504"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/layout_number"
+                 app:layout_constraintWidth_percent="0.7" />
+
+             <Button
                  android:id="@+id/bt_register"
                  android:layout_width="0dp"
                  android:layout_height="50dp"
-                 android:layout_marginTop="30dp"
+                 android:layout_marginTop="8dp"
                  android:backgroundTint="@color/darkest_shade"
                  android:elevation="2dp"
-                 android:onClick="performSignUp"
                  android:text="@string/sign_up"
                  android:textAllCaps="false"
                  android:textColor="#FFFFFF"
                  android:textSize="15sp"
                  app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintHorizontal_bias="0.504"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/layout_number"
+                 app:layout_constraintTop_toBottomOf="@+id/bt_profile"
                  app:layout_constraintWidth_percent="0.7" />
 
          </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,11 @@ class Post_LostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostLostBinding
     private lateinit var database: DatabaseReference
     private lateinit var storage: FirebaseStorage
-    private lateinit var ImageUri: Uri
+    private lateinit var Image1Uri: Uri
+    private lateinit var Image2Uri: Uri
+    private lateinit var Image3Uri: Uri
+    private lateinit var Image4Uri: Uri
+    private lateinit var Image5Uri: Uri
 
     private lateinit var etName: EditText
     private lateinit var etPhoneNumber: EditText
@@ -60,16 +64,28 @@ class Post_LostActivity : AppCompatActivity() {
         submitBtn = findViewById(R.id.Btn_post_lost_submit)
         postPhotoBtn = findViewById(R.id.post_lost_photo)
 
-        binding.postLostSelect.setOnClickListener {
-            selectImage()
+        binding.image1.setOnClickListener {
+            selectImage1()
         }
-
+        binding.image2.setOnClickListener {
+            selectImage2()
+        }
+        binding.image3.setOnClickListener {
+            selectImage3()
+        }
+        binding.image4.setOnClickListener {
+            selectImage4()
+        }
+        binding.image5.setOnClickListener {
+            selectImage5()
+        }
         postPhotoBtn.setOnClickListener {
             uploadImage()
         }
 
         //uploads name etc data to firestore database
         submitBtn.setOnClickListener {
+
             val storef = storage.reference
             val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
             val now = Date()
@@ -110,15 +126,32 @@ class Post_LostActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val fileName = formatter.format(now)
-        val finalRef = "images/$userID/$fileName"
-        val storage = FirebaseStorage.getInstance().getReference(finalRef)
-        print(ImageUri)
-        storage.putFile(ImageUri)
+        val storage1 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/1")
+        val storage2 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/2")
+        val storage3 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/3")
+        val storage4 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/4")
+        val storage5 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/5")
+
+//        if (Image2Uri != null && this::Image2Uri.isInitialized){
+//            storage2.putFile(Image2Uri)
+//        }
+//        if (Image3Uri != null && this::Image3Uri.isInitialized){
+//            storage3.putFile(Image3Uri)
+//        }
+//        if (Image4Uri != null && this::Image4Uri.isInitialized){
+//            storage4.putFile(Image4Uri)
+//        }
+//        if (Image5Uri != null && this::Image5Uri.isInitialized){
+//            storage5.putFile(Image5Uri)
+//        }
+//        if (Image1Uri != null && this::Image1Uri.isInitialized){
+//
+//        }
+        storage1.putFile(Image1Uri)
             .addOnSuccessListener {
                 Toast.makeText(this@Post_LostActivity, "Image uploaded", Toast.LENGTH_SHORT).show()
                 if (progressDialog.isShowing) progressDialog.dismiss()
@@ -128,7 +161,7 @@ class Post_LostActivity : AppCompatActivity() {
             }
     }
 
-    private fun selectImage() {
+    private fun selectImage1() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -137,12 +170,61 @@ class Post_LostActivity : AppCompatActivity() {
 
     }
 
+    private fun selectImage2() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 200)
+
+    }
+    private fun selectImage3() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 300)
+
+    }
+    private fun selectImage4() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 400)
+
+    }
+    private fun selectImage5() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 500)
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 100 && resultCode == RESULT_OK) {
-            ImageUri = data?.data!!
-            binding.image2.setImageURI(ImageUri)
+            Image1Uri = data?.data!!
+            binding.image1.setImageURI(Image1Uri)
+        }
+        if (requestCode == 200 && resultCode == RESULT_OK) {
+            Image2Uri = data?.data!!
+            binding.image2.setImageURI(Image2Uri)
+        }
+        if (requestCode == 300 && resultCode == RESULT_OK) {
+            Image3Uri = data?.data!!
+            binding.image3.setImageURI(Image3Uri)
+        }
+        if (requestCode == 400 && resultCode == RESULT_OK) {
+            Image4Uri = data?.data!!
+            binding.image4.setImageURI(Image4Uri)
+        }
+        if (requestCode == 500 && resultCode == RESULT_OK) {
+            Image5Uri = data?.data!!
+            binding.image5.setImageURI(Image5Uri)
         }
     }
 

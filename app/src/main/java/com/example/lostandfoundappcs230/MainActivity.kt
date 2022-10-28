@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             // start the activity connect to the specified class
             startActivity(intent)
-            finish()
         }
         Signin_btn = findViewById(R.id.signin_btn)
         binding.signinBtn.setOnClickListener {
