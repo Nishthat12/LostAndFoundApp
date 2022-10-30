@@ -22,8 +22,9 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupactivityBinding //binding
     private lateinit var databaseReference: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var profileUri: Uri
+    private var profileUri: Uri? = null
     private lateinit var storage: FirebaseStorage
+    private lateinit var profileUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -51,99 +52,102 @@ class SignUpActivity : AppCompatActivity() {
             val rollNumber = binding.etRollno.text.toString()
             val contactNumber = binding.etNumber.text.toString()
 
-            uploadImage()
-
-            val user = User(name, rollNumber, email, password, contactNumber)
-
             if (email.endsWith(emailString)) {
-                if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty()) {
+                if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty() && name.isNotEmpty() && rollNumber.isNotEmpty() && contactNumber.isNotEmpty()) {
                     if (password == repassword) {
-                        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    val uid = firebaseAuth.currentUser?.uid
-
-                                    if (uid != null) {
-                                        databaseReference.child(uid).setValue(user)
-                                            .addOnCompleteListener {
-
-                                                if (it.isSuccessful) {
-
-                                                } else {
-                                                    Toast.makeText(
-                                                        this,
-                                                        "Failed to Register",
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
+                        if (profileUri != null) {
+                            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        uploadImage(rollNumber)
+                                        val user = User(
+                                            name,
+                                            rollNumber,
+                                            email,
+                                            password,
+                                            contactNumber,
+                                            profileUrl
+                                        )
+                                        val uid = firebaseAuth.currentUser?.uid
+                                        if (uid != null) {
+                                            databaseReference.child(uid).setValue(user)
+                                                .addOnCompleteListener {
+                                                    if (it.isSuccessful) {
+                                                        Toast.makeText(
+                                                            this,
+                                                            "Registered Successfully",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    } else {
+                                                        Toast.makeText(
+                                                            this,
+                                                            "Failed to Register",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
                                                 }
+                                        }
+                                        firebaseAuth.currentUser?.sendEmailVerification()
+                                            ?.addOnSuccessListener {
+                                                Toast.makeText(
+                                                    this,
+                                                    "Please verify your email!",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                val intent = Intent(this, MainActivity::class.java)
+                                                startActivity(intent)
+                                            }?.addOnFailureListener {
+                                                Toast.makeText(
+                                                    this, it.toString(), Toast.LENGTH_SHORT
+                                                ).show()
                                             }
+                                    } else {
+                                        Toast.makeText(
+                                            this, it.exception.toString(), Toast.LENGTH_SHORT
+                                        ).show()
                                     }
-                                    firebaseAuth.currentUser?.sendEmailVerification()
-                                        ?.addOnSuccessListener {
-                                            Toast.makeText(
-                                                this,
-                                                "Please verify your email!",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            val intent =
-                                                Intent(this, MainActivity::class.java)
-                                            startActivity(intent)
-                                        }
-                                        ?.addOnFailureListener {
-                                            Toast.makeText(
-                                                this,
-                                                it.toString(),
-                                                Toast.LENGTH_SHORT
-                                            )
-                                                .show()
-                                        }
-                                } else {
-                                    Toast.makeText(
-                                        this,
-                                        it.exception.toString(),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
                                 }
-                            }
+                        } else {
+                            Toast.makeText(
+                                this, "Please Select a profile Photo", Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
                     } else {
                         Toast.makeText(
-                            this,
-                            "Password is not matching",
-                            Toast.LENGTH_SHORT
+                            this, "Password is not matching", Toast.LENGTH_SHORT
                         ).show()
                     }
                 } else {
-                    Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(
-                    this,
-                    "Use your IITP Webmail address only",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                    this, "Use your IITP Webmail address only", Toast.LENGTH_SHORT
+                ).show()
             }
 //        }
         }
     }
 
-    private fun uploadImage() {
+    private fun uploadImage(rollNumber: String) {
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Uploading Image...")
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
-        val storage = FirebaseStorage.getInstance().getReference("images/$userID/profilePic")
-        storage.putFile(profileUri)
-            .addOnSuccessListener {
-                Toast.makeText(this@SignUpActivity, "Image uploaded", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-            }.addOnFailureListener {
-                Toast.makeText(this@SignUpActivity, "Failed", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
+        val storage =
+            FirebaseStorage.getInstance().getReference("profileImages/$rollNumber/profilePic")
+        storage.putFile(profileUri!!).addOnSuccessListener {
+            Toast.makeText(this@SignUpActivity, "Image uploaded", Toast.LENGTH_SHORT).show()
+            storage.downloadUrl.addOnSuccessListener {
+                profileUrl = it.toString()
             }
+            if (progressDialog.isShowing) progressDialog.dismiss()
+        }.addOnFailureListener {
+            Toast.makeText(this@SignUpActivity, "Failed", Toast.LENGTH_SHORT).show()
+            if (progressDialog.isShowing) progressDialog.dismiss()
+        }
     }
 
     private fun selectImage() {

@@ -42,7 +42,7 @@
                  android:id="@+id/profile_img"
                  android:layout_width="75dp"
                  android:layout_height="75dp"
-                 android:src="@drawable/user_image_with_black_background"
+                 android:src="@drawable/ic_baseline_person_24"
                  android:scaleType="centerCrop"/>
 
          </androidx.cardview.widget.CardView>

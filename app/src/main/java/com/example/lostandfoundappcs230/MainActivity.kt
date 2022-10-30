@@ -26,9 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        // by ID we can use each component which id is assign in xml file
-        // use findViewById() to get the Button
+        firebaseAuth = FirebaseAuth.getInstance()  //initialize firebase auth
         Signup_btn = findViewById(R.id.signup_btn)
 
         // Add_button add clicklistener

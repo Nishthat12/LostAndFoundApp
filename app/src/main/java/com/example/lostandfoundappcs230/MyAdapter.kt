@@ -17,7 +17,7 @@ class MyAdapter(private val thingsList: ArrayList<Lost_things>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.lost_item_list, parent, false)
         return MyViewHolder(itemView)
     }
 

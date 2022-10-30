@@ -48,7 +48,8 @@
                             android:text="Post for Found Item"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
-                            android:textSize="25sp" />
+                            android:textSize="25sp"
+                            tools:ignore="TextContrastCheck" />
 
                     </LinearLayout>
 
@@ -153,63 +154,81 @@
                         <Button
                             android:id="@+id/post_lost_select"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="13dp"
                             android:backgroundTint="@color/lightest_shade"
                             android:drawablePadding="16dp"
-                            android:text="Select Images (max 5)"
                             android:paddingStart="8dp"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
+                            android:text="SELECT IMAGES"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
-                        <HorizontalScrollView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fillViewport="true"
-                            android:scrollbars="horizontal|vertical">
-                            <LinearLayout
-                                android:id = "@+id/photos_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp">
+                            android:textSize="17sp" />
 
-                                <ImageView
-                                    android:id="@+id/image1"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/resource_new"
-                                    />
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/view_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"/>
 
-                                <ImageView
-                                    android:id="@+id/image2"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/resource_new"/>
+<!--                        <androidx.recyclerview.widget.RecyclerView-->
+<!--                            android:id="@+id/image_recycler"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="100dp"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:scrollbars="horizontal"-->
+<!--                            android:visibility="visible"-->
+<!--                            tools:listitem="@layout/images" />-->
 
-                                <ImageView
-                                    android:id="@+id/image3"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/resource_new"/>
+<!--                        <HorizontalScrollView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:fillViewport="true"-->
+<!--                            android:scrollbars="horizontal|vertical"-->
+<!--                            tools:ignore="SpeakableTextPresentCheck">-->
 
-                                <ImageView
-                                    android:id="@+id/image4"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/resource_new"/>
-                                <ImageView
-                                    android:id="@+id/image5"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/resource_new"/>
-                            </LinearLayout>
-                        </HorizontalScrollView>
+<!--                            <LinearLayout-->
+<!--                                android:id="@+id/photos_horizontal"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="100dp">-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/image1"-->
+<!--                                    android:layout_width="100dp"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:src="@drawable/resource_new" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/image2"-->
+<!--                                    android:layout_width="100dp"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:src="@drawable/resource_new" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/image3"-->
+<!--                                    android:layout_width="100dp"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:src="@drawable/resource_new" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/image4"-->
+<!--                                    android:layout_width="100dp"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:src="@drawable/resource_new" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/image5"-->
+<!--                                    android:layout_width="100dp"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:src="@drawable/resource_new" />-->
+<!--                            </LinearLayout>-->
+<!--                        </HorizontalScrollView>-->
                         <Button
                             android:id="@+id/post_lost_photo"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:layout_marginTop="13dp"
                             android:backgroundTint="@color/lightest_shade"
                             android:drawablePadding="16dp"
                             android:hint="Post Images"

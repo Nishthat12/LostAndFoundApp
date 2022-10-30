@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.example.lostandfoundappcs230.databinding.ActivityPostLostBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -19,8 +20,13 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Post_LostActivity : AppCompatActivity() {
+
+    private lateinit var viewPager: ViewPager
+    private lateinit var selectBtn: Button
+    private lateinit var multipleImagesUri: ArrayList<Uri>
 
     private lateinit var binding: ActivityPostLostBinding
     private lateinit var database: DatabaseReference
@@ -31,13 +37,15 @@ class Post_LostActivity : AppCompatActivity() {
     private lateinit var Image4Uri: Uri
     private lateinit var Image5Uri: Uri
 
+    private lateinit var username:String
+
     private lateinit var etName: EditText
     private lateinit var etPhoneNumber: EditText
     private lateinit var etMessage: EditText
     private lateinit var etWhereLost: EditText
     private lateinit var submitBtn: Button
     private lateinit var postPhotoBtn: Button
-    private lateinit var image1url: String
+    lateinit var image1url: String
 
 
     private var db = Firebase.firestore
@@ -48,14 +56,20 @@ class Post_LostActivity : AppCompatActivity() {
         supportActionBar?.hide() //hide the title bar
 
         super.onCreate(savedInstanceState)
-        binding = ActivityPostLostBinding.inflate(layoutInflater)
+        binding = ActivityPostLostBinding.inflate(layoutInflater) //initialize binding
         setContentView(binding.root)
 
-        storage = FirebaseStorage.getInstance()
+        storage = FirebaseStorage.getInstance()  //initialize storage
 
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
-        readData(userID)
+        val userID = FirebaseAuth.getInstance().currentUser!!.uid  //get userid
+        readData(userID)  //function to read user data for name and roll number
 
+//        viewPager = findViewById(R.id.view_pager)
+//        selectBtn = findViewById(R.id.post_lost_select)
+
+//        selectBtn.setOnClickListener {
+//            selectMultipleImages()
+//        }
 
         etName = findViewById(R.id.post_lost_name)
         etPhoneNumber = findViewById(R.id.post_lost_number)
@@ -79,6 +93,8 @@ class Post_LostActivity : AppCompatActivity() {
         binding.image5.setOnClickListener {
             selectImage5()
         }
+
+        //post photo button on click listener
         postPhotoBtn.setOnClickListener {
             uploadImage()
         }
@@ -86,19 +102,15 @@ class Post_LostActivity : AppCompatActivity() {
         //uploads name etc data to firestore database
         submitBtn.setOnClickListener {
 
-            val storef = storage.reference
-            val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-            val now = Date()
-            val fileName = formatter.format(now)
-            val finalRef = "images/$userID/$fileName.jpeg"
-
             val sName = etName.text.toString().trim()
             val sPhoneNumber = etPhoneNumber.text.toString().trim()
             val sMessage = etMessage.text.toString().trim()
             val sWhereLost = etWhereLost.text.toString().trim()
-            storef.child(finalRef).downloadUrl.addOnSuccessListener {
-                image1url = it.toString()
-            }
+
+            val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
+            val now = Date()
+            val fileName = formatter.format(now)
+//
             val userMap = hashMapOf(
                 "name" to sName,
                 "phoneNumber" to sPhoneNumber,
@@ -106,13 +118,16 @@ class Post_LostActivity : AppCompatActivity() {
                 "whereLost" to sWhereLost,
                 "imageURL" to image1url
             )
-            db.collection("user").document(userID).set(userMap)
+            //collects data and adds to firestore
+            db.collection("user").document(userID).collection("Lost Items").document(fileName).set(userMap)
+            db.collection("Lost Items").document(fileName).set(userMap)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully Posted", Toast.LENGTH_SHORT).show()
                     etName.text.clear()
                     etPhoneNumber.text.clear()
                     etMessage.text.clear()
                     etWhereLost.text.clear()
+                    binding.image1.setImageResource(R.drawable.resource_new)
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Failed to post", Toast.LENGTH_SHORT).show()
@@ -120,7 +135,20 @@ class Post_LostActivity : AppCompatActivity() {
         }
     }
 
+//    private fun selectMultipleImages() {
+//        val intent = Intent()
+//        intent.type = "image/*"
+//        intent.action = Intent.ACTION_GET_CONTENT
+//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+//        startActivityForResult(intent, 69)
+//        if (multipleImagesUri != null) {
+//            multipleImagesUri.clear()
+//        }
+//    }
+
+    //function to upload image firebase storage
     private fun uploadImage() {
+        //shows a progress dialog
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Uploading Image...")
         progressDialog.setCancelable(false)
@@ -130,37 +158,23 @@ class Post_LostActivity : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val fileName = formatter.format(now)
-        val storage1 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/1")
-        val storage2 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/2")
-        val storage3 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/3")
-        val storage4 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/4")
-        val storage5 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/5")
+        val storage = FirebaseStorage.getInstance().getReference("images/$username/$fileName/1")
 
-//        if (Image2Uri != null && this::Image2Uri.isInitialized){
-//            storage2.putFile(Image2Uri)
-//        }
-//        if (Image3Uri != null && this::Image3Uri.isInitialized){
-//            storage3.putFile(Image3Uri)
-//        }
-//        if (Image4Uri != null && this::Image4Uri.isInitialized){
-//            storage4.putFile(Image4Uri)
-//        }
-//        if (Image5Uri != null && this::Image5Uri.isInitialized){
-//            storage5.putFile(Image5Uri)
-//        }
-//        if (Image1Uri != null && this::Image1Uri.isInitialized){
-//
-//        }
-        storage1.putFile(Image1Uri)
+        storage.putFile(Image1Uri)
             .addOnSuccessListener {
                 Toast.makeText(this@Post_LostActivity, "Image uploaded", Toast.LENGTH_SHORT).show()
                 if (progressDialog.isShowing) progressDialog.dismiss()
+                storage.downloadUrl.addOnSuccessListener {
+                    image1url = it.toString()
+                }
             }.addOnFailureListener {
                 Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
                 if (progressDialog.isShowing) progressDialog.dismiss()
             }
     }
 
+
+    //function to select a image and display it
     private fun selectImage1() {
         val intent = Intent()
         intent.type = "image/*"
@@ -178,6 +192,7 @@ class Post_LostActivity : AppCompatActivity() {
         startActivityForResult(intent, 200)
 
     }
+
     private fun selectImage3() {
         val intent = Intent()
         intent.type = "image/*"
@@ -186,6 +201,7 @@ class Post_LostActivity : AppCompatActivity() {
         startActivityForResult(intent, 300)
 
     }
+
     private fun selectImage4() {
         val intent = Intent()
         intent.type = "image/*"
@@ -194,6 +210,7 @@ class Post_LostActivity : AppCompatActivity() {
         startActivityForResult(intent, 400)
 
     }
+
     private fun selectImage5() {
         val intent = Intent()
         intent.type = "image/*"
@@ -206,28 +223,38 @@ class Post_LostActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+//        if (requestCode == 69 && resultCode == RESULT_OK) {
+//            if (data != null) {
+//                var count = data.clipData!!.itemCount
+//                for (i in 0 until count) {
+//                    multipleImagesUri.add(data.clipData!!.getItemAt(i).uri)
+//                }
+//            }else{
+//                multipleImagesUri.add(data?.data!!)
+//            }
+//
+//            Image1Uri = data?.data!!
+//            binding.image1.setImageURI(Image1Uri)
+//        }
         if (requestCode == 100 && resultCode == RESULT_OK) {
             Image1Uri = data?.data!!
             binding.image1.setImageURI(Image1Uri)
         }
-        if (requestCode == 200 && resultCode == RESULT_OK) {
-            Image2Uri = data?.data!!
-            binding.image2.setImageURI(Image2Uri)
-        }
-        if (requestCode == 300 && resultCode == RESULT_OK) {
-            Image3Uri = data?.data!!
-            binding.image3.setImageURI(Image3Uri)
-        }
-        if (requestCode == 400 && resultCode == RESULT_OK) {
-            Image4Uri = data?.data!!
-            binding.image4.setImageURI(Image4Uri)
-        }
-        if (requestCode == 500 && resultCode == RESULT_OK) {
-            Image5Uri = data?.data!!
-            binding.image5.setImageURI(Image5Uri)
-        }
+//        if (requestCode == 300 && resultCode == RESULT_OK) {
+//            Image3Uri = data?.data!!
+//            binding.image3.setImageURI(Image3Uri)
+//        }
+//        if (requestCode == 400 && resultCode == RESULT_OK) {
+//            Image4Uri = data?.data!!
+//            binding.image4.setImageURI(Image4Uri)
+//        }
+//        if (requestCode == 500 && resultCode == RESULT_OK) {
+//            Image5Uri = data?.data!!
+//            binding.image5.setImageURI(Image5Uri)
+//        }
     }
 
+    //function to read the name and number from realtime database
     private fun readData(userID: String) {
 
         database = FirebaseDatabase.getInstance().getReference("Users")
@@ -235,6 +262,7 @@ class Post_LostActivity : AppCompatActivity() {
 
             val name = it.child("name").value
             val number = it.child("contactNumber").value
+            username = it.child("email").value.toString()
             etName.text = name.toString().toEditable()
             etPhoneNumber.text = number.toString().toEditable()
 

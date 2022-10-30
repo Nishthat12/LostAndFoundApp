@@ -4,13 +4,14 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/night_lightest</item>
         <item name="colorPrimaryVariant">@color/night_alternate_lightest</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/night_lightest</item>
         <item name="colorSecondaryVariant">@color/night_alternate_lightest</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
 </resources>

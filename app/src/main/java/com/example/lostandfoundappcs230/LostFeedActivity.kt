@@ -29,9 +29,10 @@ class LostFeedActivity : AppCompatActivity() {
         thingsList = arrayListOf()
 
         db = FirebaseFirestore.getInstance()
-        db.collection("user").get().addOnSuccessListener {
+        db.collection("Lost Items").get().addOnSuccessListener {
             if (!it.isEmpty){
                 for (data in it.documents){
+                    db.collection("user").document()
                     val thing: Lost_things? =  data.toObject(Lost_things::class.java)
                     if (thing != null) {
                         thingsList.add(thing )

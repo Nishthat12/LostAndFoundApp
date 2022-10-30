@@ -14,4 +14,6 @@
     <string name="check_feed_nof_lost_items">Check Feed \nof Lost Items</string>
     <string name="check_feed_nof_found_items">Check Feed \nof found Items</string>
     <string name="post_for_lost_item">Post For Lost Item</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

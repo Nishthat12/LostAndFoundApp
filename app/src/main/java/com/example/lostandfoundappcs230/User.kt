@@ -5,5 +5,6 @@ data class User(
     val RollNumber: String? = null,
     val Email: String? = null,
     val Password: String? = null,
-    val ContactNumber: String? = null
+    val ContactNumber: String? = null,
+    val profileUrl: String? = null
 )
