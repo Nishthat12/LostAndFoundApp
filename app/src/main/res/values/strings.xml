@@ -38,4 +38,5 @@
     <string name="lost_amp_found"><![CDATA[Lost & Found]]></string>
     <string name="claim">Claim !</string>
     <string name="i_found_it">I found It!</string>
+    <string name="please_upload_image_before_submitting">Please Upload Image before submitting</string>
 </resources>

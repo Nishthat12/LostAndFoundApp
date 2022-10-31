@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="night_alternate_lightest">#A5C9CA</color>
-    <color name="night_lightest">#E7F6F2</color>
-    <color name="night_alternate_darkest">#395B64</color>
+    <color name="night_lightest" tools:ignore="MissingDefaultResource">#E7F6F2</color>
+    <color name="night_alternate_darkest" tools:ignore="MissingDefaultResource">#395B64</color>
 </resources>

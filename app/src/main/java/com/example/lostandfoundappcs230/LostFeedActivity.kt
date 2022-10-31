@@ -12,7 +12,7 @@ import com.google.firebase.ktx.Firebase
 
 class LostFeedActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var thingsList: ArrayList<Lost_things>
+    private lateinit var thingsList: ArrayList<Things>
     private var db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class LostFeedActivity : AppCompatActivity() {
             if (!it.isEmpty) {
                 for (data in it.documents) {
                     db.collection("user").document()
-                    val thing: Lost_things? = data.toObject(Lost_things::class.java)
+                    val thing: Things? = data.toObject(Things::class.java)
                     if (thing != null) {
                         thingsList.add(thing)
                     }

@@ -31,14 +31,14 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/PostLostLayout"
+                        android:id="@+id/PostFoundLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:weightSum="100">
 
                         <TextView
-                            android:id="@+id/post_lost"
+                            android:id="@+id/post_found"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -58,7 +58,7 @@
                         android:id="@+id/PostLostLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/PostLostLayout"
+                        android:layout_below="@id/PostFoundLayout"
                         android:orientation="vertical"
                         android:padding="16dp">
 
@@ -68,7 +68,7 @@
                             android:layout_marginTop="16dp">
 
                             <EditText
-                                android:id="@+id/post_lost_name"
+                                android:id="@+id/post_found_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:autofillHints="Name"
@@ -93,7 +93,7 @@
                             android:layout_marginTop="16dp">
 
                             <EditText
-                                android:id="@+id/post_lost_number"
+                                android:id="@+id/post_found_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:autofillHints="Phone Number"
@@ -116,7 +116,7 @@
                             android:layout_marginTop="16dp">
 
                             <EditText
-                                android:id="@+id/post_lost_message"
+                                android:id="@+id/post_found_message"
                                 android:layout_width="match_parent"
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
@@ -139,7 +139,7 @@
                             android:layout_marginTop="16dp">
 
                             <EditText
-                                android:id="@+id/post_lost_where"
+                                android:id="@+id/post_found_where"
                                 android:layout_width="match_parent"
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
@@ -156,35 +156,75 @@
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <Button
-                            android:id="@+id/post_lost_select"
+                        <TextView
+                            android:id="@+id/post_found_select"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
                             android:layout_marginTop="13dp"
-                            android:backgroundTint="@color/lightest_shade"
-                            android:drawablePadding="16dp"
-                            android:fontFamily="sans-serif-medium"
-                            android:paddingStart="8dp"
-                            android:paddingTop="12dp"
-                            android:paddingBottom="12dp"
+                            android:background="@color/greyy"
                             android:text="@string/select_images"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="17sp"
-                            tools:ignore="RtlSymmetry" />
+                            android:textSize="18sp" />
 
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/view_pager"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp" />
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fillViewport="true"
+                            android:scrollbars="horizontal|vertical"
+                            tools:ignore="SpeakableTextPresentCheck">
+
+                            <LinearLayout
+                                android:id="@+id/photos_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:id="@+id/image1"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_1"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_2"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image3"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_3"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image4"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_4"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image5"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_5"
+                                    android:src="@drawable/resource_new" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
 
                         <Button
-                            android:id="@+id/post_lost_photo"
+                            android:id="@+id/post_found_photo"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
+                            android:layout_marginTop="13dp"
                             android:backgroundTint="@color/lightest_shade"
                             android:drawablePadding="16dp"
-                            android:hint="@string/post_images"
+                            android:hint="@string/upload_images"
                             android:paddingStart="8dp"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
@@ -193,11 +233,23 @@
                             android:textSize="16sp"
                             tools:ignore="RtlSymmetry" />
 
+                        <TextView
+                            android:id="@+id/note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/please_upload_images_before_clicking_submit"
+                            android:textAlignment="center"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <Button
-                            android:id="@+id/Btn_post_lost_submit"
+                            android:id="@+id/Btn_post_found_submit"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0dp"
                             android:layout_weight="50"
                             android:backgroundTint="@color/darkest_shade"
                             android:gravity="center_horizontal"

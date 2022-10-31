@@ -1,6 +1,6 @@
 package com.example.lostandfoundappcs230
 
-data class Lost_things(
+data class Things(
     val name: String? = null,
     val phoneNumber: String? = null,
     val message: String? = null,

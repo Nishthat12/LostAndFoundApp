@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MyAdapter(private val context: Context, private val thingsList: ArrayList<Lost_things>) :
+class MyAdapter(private val context: Context, private val thingsList: ArrayList<Things>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val Name: TextView = itemView.findViewById(R.id.feed_name)

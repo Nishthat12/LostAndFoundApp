@@ -33,6 +33,7 @@ class SignUpActivity : AppCompatActivity() {
         val emailString = "@iitp.ac.in"
         binding = ActivitySignupactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        profileUrl = null.toString()
 
         firebaseAuth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
@@ -42,12 +43,28 @@ class SignUpActivity : AppCompatActivity() {
             selectImage()
         }
 
+
+
+        binding.btUpload.setOnClickListener {
+            val rollNumber = binding.etRollno.text.toString()
+            if (rollNumber.isNotEmpty()){
+                uploadImage(rollNumber)
+            }else{
+                Toast.makeText(
+                    this,
+                    "Empty Fields are not allowed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+
         binding.btRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
+            val rollNumber = binding.etRollno.text.toString()
             val repassword = binding.etRepeatPassword.text.toString()
             val name = binding.etName.text.toString()
-            val rollNumber = binding.etRollno.text.toString()
             val contactNumber = binding.etNumber.text.toString()
 
             if (email.endsWith(emailString)) {
@@ -57,7 +74,6 @@ class SignUpActivity : AppCompatActivity() {
                             firebaseAuth.createUserWithEmailAndPassword(email, password)
                                 .addOnCompleteListener { authResultTask ->
                                     if (authResultTask.isSuccessful) {
-                                        uploadImage(rollNumber)
                                         val user = User(
                                             name,
                                             rollNumber,

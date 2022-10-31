@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -232,7 +246,7 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/lightest_shade"
                     android:elevation="2dp"
-                    android:text="@string/upload_profile_image"
+                    android:text="Select Profile Image"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="15sp"
@@ -241,12 +255,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_number"
                     app:layout_constraintWidth_percent="0.7" />
-
+                <Button
+                    android:id="@+id/bt_upload"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="4dp"
+                    android:backgroundTint="@color/lightest_shade"
+                    android:elevation="2dp"
+                    android:text="@string/upload_profile_image"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.504"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bt_profile"
+                    app:layout_constraintWidth_percent="0.7" />
+                <TextView
+                    android:id="@+id/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/please_upload_image_before_submitting"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toBottomOf="@+id/bt_upload"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
                 <Button
                     android:id="@+id/bt_register"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
                     android:backgroundTint="@color/darkest_shade"
                     android:elevation="2dp"
                     android:text="@string/sign_up"
@@ -256,7 +296,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.504"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bt_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/note"
                     app:layout_constraintWidth_percent="0.7" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
