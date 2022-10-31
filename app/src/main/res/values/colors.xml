@@ -9,4 +9,7 @@
     <color name="lightest_shade">#eef6ef</color>
     <color name="alternate_darkest">#76BA99</color>
     <color name="night_alternate_lightest">#A5C9CA</color>
+    <color name="grey">#8F8F8F</color>
+    <color name="no">#B1B1B1</color>
+    <color name="greyy">#C4C4C4</color>
 </resources>

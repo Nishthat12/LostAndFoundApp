@@ -48,7 +48,8 @@
                             android:text="@string/post_for_lost_item"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
-                            android:textSize="25sp" />
+                            android:textSize="25sp"
+                            tools:ignore="TextContrastCheck" />
 
                     </LinearLayout>
 
@@ -150,61 +151,61 @@
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <Button
+                        <TextView
                             android:id="@+id/post_lost_select"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="30dp"
                             android:layout_marginTop="13dp"
-                            android:backgroundTint="@color/lightest_shade"
-                            android:drawablePadding="16dp"
-                            android:text="Select Images (max 5)"
-                            android:paddingStart="8dp"
-                            android:paddingTop="12dp"
-                            android:paddingBottom="12dp"
+                            android:textAlignment="center"
+                            android:background="@color/greyy"
+                            android:text="Select Images"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fillViewport="true"
-                        android:scrollbars="horizontal|vertical">
-                        <LinearLayout
-                            android:id = "@+id/photos_horizontal"
+                            android:textSize="20sp" />
+
+                        <HorizontalScrollView
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp">
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fillViewport="true"
+                            android:scrollbars="horizontal|vertical"
+                            tools:ignore="SpeakableTextPresentCheck">
 
-                            <ImageView
-                                android:id="@+id/image1"
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/resource_new"
-                                />
+                            <LinearLayout
+                                android:id="@+id/photos_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp">
 
-                            <ImageView
-                                android:id="@+id/image2"
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/resource_new"/>
+                                <ImageView
+                                    android:id="@+id/image1"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/resource_new" />
 
-                            <ImageView
-                                android:id="@+id/image3"
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/resource_new"/>
+                                <ImageView
+                                    android:id="@+id/image2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/resource_new" />
 
-                            <ImageView
-                                android:id="@+id/image4"
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/resource_new"/>
-                            <ImageView
-                                android:id="@+id/image5"
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/resource_new"/>
-                        </LinearLayout>
-                    </HorizontalScrollView>
+                                <ImageView
+                                    android:id="@+id/image3"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image4"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image5"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/resource_new" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
                         <Button
                             android:id="@+id/post_lost_photo"
                             android:layout_width="match_parent"
@@ -219,11 +220,24 @@
                             android:textColor="#fff"
                             android:textColorHint="@color/black"
                             android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:text="Please Upload Images before clicking submit"
+                            android:textAlignment="center"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <Button
                             android:id="@+id/Btn_post_lost_submit"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0dp"
                             android:layout_weight="50"
                             android:backgroundTint="@color/darkest_shade"
                             android:gravity="center_horizontal"

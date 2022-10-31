@@ -6,6 +6,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -24,10 +25,15 @@ class LostFeedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lost_feed)
 
         recyclerView = findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this@LostFeedActivity)
 
         thingsList = arrayListOf()
 
+        fetchData()
+
+    }
+
+    private fun fetchData() {
         db = FirebaseFirestore.getInstance()
         db.collection("Lost Items").get().addOnSuccessListener {
             if (!it.isEmpty){
@@ -35,10 +41,10 @@ class LostFeedActivity : AppCompatActivity() {
                     db.collection("user").document()
                     val thing: Lost_things? =  data.toObject(Lost_things::class.java)
                     if (thing != null) {
-                        thingsList.add(thing )
+                        thingsList.add(thing)
                     }
                 }
-                recyclerView.adapter = MyAdapter(thingsList)
+                recyclerView.adapter = MyAdapter(this, thingsList)
             }
         }.addOnFailureListener {
             Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
