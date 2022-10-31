@@ -10,9 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.lostandfoundappcs230.databinding.ActivityPostLostBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -22,7 +19,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Post_LostActivity : AppCompatActivity() {
 
@@ -66,13 +62,6 @@ class Post_LostActivity : AppCompatActivity() {
         val userID = FirebaseAuth.getInstance().currentUser!!.uid  //get userid
         readData(userID)  //function to read user data for name and roll number
 
-//        viewPager = findViewById(R.id.view_pager)
-//        selectBtn = findViewById(R.id.post_lost_select)
-
-//        selectBtn.setOnClickListener {
-//            selectMultipleImages()
-//        }
-
         etName = findViewById(R.id.post_lost_name)
         etPhoneNumber = findViewById(R.id.post_lost_number)
         etMessage = findViewById(R.id.post_lost_message)
@@ -113,7 +102,7 @@ class Post_LostActivity : AppCompatActivity() {
             val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
             val now = Date()
             val fileName = formatter.format(now)
-//
+
             val userMap = hashMapOf(
                 "name" to sName,
                 "phoneNumber" to sPhoneNumber,
@@ -150,17 +139,6 @@ class Post_LostActivity : AppCompatActivity() {
         }
     }
 
-//    private fun selectMultipleImages() {
-//        val intent = Intent()
-//        intent.type = "image/*"
-//        intent.action = Intent.ACTION_GET_CONTENT
-//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-//        startActivityForResult(intent, 69)
-//        if (multipleImagesUri != null) {
-//            multipleImagesUri.clear()
-//        }
-//    }
-
     //function to upload image firebase storage
     private fun uploadImage() {
 //        shows a progress dialog
@@ -169,7 +147,6 @@ class Post_LostActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val fileName = formatter.format(now)
@@ -181,7 +158,8 @@ class Post_LostActivity : AppCompatActivity() {
         if (Image1Uri != null) {
             storage1.putFile(Image1Uri!!)
                 .addOnSuccessListener {
-                    Toast.makeText(this@Post_LostActivity, "1st Image uploaded", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Post_LostActivity, "1st Image uploaded", Toast.LENGTH_SHORT)
+                        .show()
                     if (progressDialog.isShowing) progressDialog.dismiss()
                     storage1.downloadUrl.addOnSuccessListener {
                         image1url = it.toString()
@@ -194,54 +172,58 @@ class Post_LostActivity : AppCompatActivity() {
         if (Image2Uri != null) {
             storage2.putFile(Image2Uri!!)
                 .addOnSuccessListener {
-                Toast.makeText(this@Post_LostActivity, "2nd Image uploaded", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-                storage2.downloadUrl.addOnSuccessListener {
-                    image2url = it.toString()
+                    Toast.makeText(this@Post_LostActivity, "2nd Image uploaded", Toast.LENGTH_SHORT)
+                        .show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
+                    storage2.downloadUrl.addOnSuccessListener {
+                        image2url = it.toString()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-            }
         }
         if (Image3Uri != null) {
             storage3.putFile(Image3Uri!!)
                 .addOnSuccessListener {
-                Toast.makeText(this@Post_LostActivity, "3rd Image uploaded", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-                storage3.downloadUrl.addOnSuccessListener {
-                    image3url = it.toString()
+                    Toast.makeText(this@Post_LostActivity, "3rd Image uploaded", Toast.LENGTH_SHORT)
+                        .show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
+                    storage3.downloadUrl.addOnSuccessListener {
+                        image3url = it.toString()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-            }
         }
         if (Image4Uri != null) {
             storage4.putFile(Image4Uri!!)
                 .addOnSuccessListener {
-                Toast.makeText(this@Post_LostActivity, "4th Image uploaded", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-                storage4.downloadUrl.addOnSuccessListener {
-                    image4url = it.toString()
+                    Toast.makeText(this@Post_LostActivity, "4th Image uploaded", Toast.LENGTH_SHORT)
+                        .show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
+                    storage4.downloadUrl.addOnSuccessListener {
+                        image4url = it.toString()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-            }
         }
         if (Image5Uri != null) {
             storage5.putFile(Image5Uri!!)
                 .addOnSuccessListener {
-                Toast.makeText(this@Post_LostActivity, "5th Image uploaded", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-                storage5.downloadUrl.addOnSuccessListener {
-                    image5url = it.toString()
+                    Toast.makeText(this@Post_LostActivity, "5th Image uploaded", Toast.LENGTH_SHORT)
+                        .show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
+                    storage5.downloadUrl.addOnSuccessListener {
+                        image5url = it.toString()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(this@Post_LostActivity, "Failed", Toast.LENGTH_SHORT).show()
-                if (progressDialog.isShowing) progressDialog.dismiss()
-            }
         }
 
     }
@@ -295,20 +277,6 @@ class Post_LostActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-//        if (requestCode == 69 && resultCode == RESULT_OK) {
-//            if (data != null) {
-//                var count = data.clipData!!.itemCount
-//                for (i in 0 until count) {
-//                    multipleImagesUri.add(data.clipData!!.getItemAt(i).uri)
-//                }
-//            }else{
-//                multipleImagesUri.add(data?.data!!)
-//            }
-//
-//            Image1Uri = data?.data!!
-//            binding.image1.setImageURI(Image1Uri)
-//        }
         if (requestCode == 100 && resultCode == RESULT_OK) {
             Image1Uri = data?.data!!
             binding.image1.setImageURI(Image1Uri)

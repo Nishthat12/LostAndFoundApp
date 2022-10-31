@@ -6,7 +6,6 @@ import android.view.Window
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -36,10 +35,10 @@ class LostFeedActivity : AppCompatActivity() {
     private fun fetchData() {
         db = FirebaseFirestore.getInstance()
         db.collection("Lost Items").get().addOnSuccessListener {
-            if (!it.isEmpty){
-                for (data in it.documents){
+            if (!it.isEmpty) {
+                for (data in it.documents) {
                     db.collection("user").document()
-                    val thing: Lost_things? =  data.toObject(Lost_things::class.java)
+                    val thing: Lost_things? = data.toObject(Lost_things::class.java)
                     if (thing != null) {
                         thingsList.add(thing)
                     }

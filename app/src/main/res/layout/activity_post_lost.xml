@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        tools:ignore="UselessParent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,7 +50,7 @@
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="25sp"
-                            tools:ignore="TextContrastCheck" />
+                            tools:ignore="InefficientWeight,TextContrastCheck" />
 
                     </LinearLayout>
 
@@ -81,6 +82,7 @@
                                 android:scaleType="centerCrop"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/cities" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +98,7 @@
                                 android:layout_height="60dp"
                                 android:autofillHints="Phone Number"
                                 android:drawablePadding="16dp"
-                                android:hint="Phone Number"
+                                android:hint="@string/phone_number"
                                 android:inputType="number"
                                 android:maxLines="1"
                                 android:paddingStart="8dp"
@@ -104,6 +106,7 @@
                                 android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/us_phones" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +121,7 @@
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
                                 android:drawablePadding="16dp"
-                                android:hint="Message"
+                                android:hint="@string/message"
                                 android:inputType="textMultiLine"
                                 android:maxLines="3"
                                 android:paddingStart="8dp"
@@ -126,6 +129,7 @@
                                 android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,7 +144,7 @@
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
                                 android:drawablePadding="16dp"
-                                android:hint="Where Lost?"
+                                android:hint="@string/where_lost"
                                 android:inputType="textMultiLine"
                                 android:maxLines="3"
                                 android:paddingStart="8dp"
@@ -148,6 +152,7 @@
                                 android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,11 +161,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginTop="13dp"
-                            android:textAlignment="center"
                             android:background="@color/greyy"
-                            android:text="Select Images"
+                            android:text="@string/select_images"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="18sp" />
 
                         <HorizontalScrollView
                             android:layout_width="wrap_content"
@@ -179,33 +184,39 @@
                                     android:id="@+id/image1"
                                     android:layout_width="100dp"
                                     android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_1"
                                     android:src="@drawable/resource_new" />
 
                                 <ImageView
                                     android:id="@+id/image2"
                                     android:layout_width="100dp"
                                     android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_2"
                                     android:src="@drawable/resource_new" />
 
                                 <ImageView
                                     android:id="@+id/image3"
                                     android:layout_width="100dp"
                                     android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_3"
                                     android:src="@drawable/resource_new" />
 
                                 <ImageView
                                     android:id="@+id/image4"
                                     android:layout_width="100dp"
                                     android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_4"
                                     android:src="@drawable/resource_new" />
 
                                 <ImageView
                                     android:id="@+id/image5"
                                     android:layout_width="100dp"
                                     android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_5"
                                     android:src="@drawable/resource_new" />
                             </LinearLayout>
                         </HorizontalScrollView>
+
                         <Button
                             android:id="@+id/post_lost_photo"
                             android:layout_width="match_parent"
@@ -213,13 +224,14 @@
                             android:layout_marginTop="13dp"
                             android:backgroundTint="@color/lightest_shade"
                             android:drawablePadding="16dp"
-                            android:hint="Post Images"
+                            android:hint="@string/upload_images"
                             android:paddingStart="8dp"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
                             android:textColor="#fff"
                             android:textColorHint="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="RtlSymmetry" />
 
                         <TextView
                             android:id="@+id/note"
@@ -228,7 +240,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
                             android:gravity="center_horizontal"
-                            android:text="Please Upload Images before clicking submit"
+                            android:text="@string/please_upload_images_before_clicking_submit"
                             android:textAlignment="center"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -243,7 +255,7 @@
                             android:gravity="center_horizontal"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
-                            android:text="Submit"
+                            android:text="@string/submit"
                             android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="16sp"

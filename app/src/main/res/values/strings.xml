@@ -16,4 +16,26 @@
     <string name="post_for_lost_item">Post For Lost Item</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Sign In</string>
+    <string name="app_logo">App Logo</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="post_for_found_item">Post for Found Item</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="message">Message</string>
+    <string name="where_lost">Where Lost?</string>
+    <string name="select_images">SELECT IMAGES</string>
+    <string name="post_images">Post Images</string>
+    <string name="submit">Submit</string>
+    <string name="lost_item_image_1">Lost Item Image 1</string>
+    <string name="lost_item_image_2">Lost Item Image 2</string>
+    <string name="lost_item_image_3">Lost Item Image 3</string>
+    <string name="lost_item_image_4">Lost Item Image 4</string>
+    <string name="lost_item_image_5">Lost Item Image 5</string>
+    <string name="upload_images">Upload Images</string>
+    <string name="please_upload_images_before_clicking_submit">Please Upload Images before clicking submit</string>
+    <string name="profile_placeholder">Profile PlaceHolder</string>
+    <string name="upload_profile_image">Upload Profile Image</string>
+    <string name="lost_amp_found"><![CDATA[Lost & Found]]></string>
+    <string name="claim">Claim !</string>
+    <string name="i_found_it">I found It!</string>
 </resources>

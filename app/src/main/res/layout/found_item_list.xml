@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="50"
             android:background="@color/darkest_shade"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -37,7 +36,7 @@
             tools:ignore="NotSibling">
 
             <LinearLayout
-                android:id = "@+id/photos_horizontal"
+                android:id="@+id/photos_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp">
 
@@ -45,8 +44,7 @@
                     android:id="@+id/image1"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/resource_new"
-                    />
+                    android:src="@drawable/resource_new" />
 
                 <ImageView
                     android:id="@+id/image2"
@@ -58,18 +56,19 @@
                     android:id="@+id/image3"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/resource_new"/>
+                    android:src="@drawable/resource_new" />
 
                 <ImageView
                     android:id="@+id/image4"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/resource_new"/>
+                    android:src="@drawable/resource_new" />
+
                 <ImageView
                     android:id="@+id/image5"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/resource_new"/>
+                    android:src="@drawable/resource_new" />
             </LinearLayout>
 
             <TextView
@@ -81,6 +80,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:textColor="@color/black"
+                tools:ignore="RtlSymmetry"
                 tools:text="@tools:sample/cities" />
 
             <TextView
@@ -92,6 +92,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:textColor="@color/black"
+                tools:ignore="RtlSymmetry"
                 tools:text="@tools:sample/us_phones" />
 
             <TextView
@@ -101,9 +102,10 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/lightest_shade"
                 android:paddingStart="10dp"
-                android:textColor="@color/black"
                 android:paddingTop="10dp"
+                android:textColor="@color/black"
                 android:textSize="14sp"
+                tools:ignore="RtlSymmetry"
                 tools:text="@tools:sample/lorem/random" />
 
             <TextView
@@ -116,6 +118,7 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                tools:ignore="RtlSymmetry"
                 tools:text="@tools:sample/lorem" />
 
 
@@ -129,7 +132,7 @@
                 android:gravity="center_horizontal"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Claim !"
+                android:text="@string/claim"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="16sp"

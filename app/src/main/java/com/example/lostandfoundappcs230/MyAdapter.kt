@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
 
 class MyAdapter(private val context: Context, private val thingsList: ArrayList<Lost_things>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {

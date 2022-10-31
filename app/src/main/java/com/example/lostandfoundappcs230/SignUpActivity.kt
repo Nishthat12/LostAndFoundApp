@@ -12,8 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -57,8 +55,8 @@ class SignUpActivity : AppCompatActivity() {
                     if (password == repassword) {
                         if (profileUri != null) {
                             firebaseAuth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful) {
+                                .addOnCompleteListener { authResultTask ->
+                                    if (authResultTask.isSuccessful) {
                                         uploadImage(rollNumber)
                                         val user = User(
                                             name,
@@ -103,7 +101,9 @@ class SignUpActivity : AppCompatActivity() {
                                             }
                                     } else {
                                         Toast.makeText(
-                                            this, it.exception.toString(), Toast.LENGTH_SHORT
+                                            this,
+                                            authResultTask.exception.toString(),
+                                            Toast.LENGTH_SHORT
                                         ).show()
                                     }
                                 }

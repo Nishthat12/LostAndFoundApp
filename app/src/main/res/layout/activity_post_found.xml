@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        tools:ignore="UselessParent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,11 +46,11 @@
                             android:background="@color/darkest_shade"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
-                            android:text="Post for Found Item"
+                            android:text="@string/post_for_found_item"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="25sp"
-                            tools:ignore="TextContrastCheck" />
+                            tools:ignore="InefficientWeight,TextContrastCheck" />
 
                     </LinearLayout>
 
@@ -81,6 +82,7 @@
                                 android:scaleType="centerCrop"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/cities" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +98,7 @@
                                 android:layout_height="60dp"
                                 android:autofillHints="Phone Number"
                                 android:drawablePadding="16dp"
-                                android:hint="Phone Number"
+                                android:hint="@string/phone_number"
                                 android:inputType="number"
                                 android:maxLines="1"
                                 android:paddingStart="8dp"
@@ -104,6 +106,7 @@
                                 android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/us_phones" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +121,7 @@
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
                                 android:drawablePadding="16dp"
-                                android:hint="Message"
+                                android:hint="@string/message"
                                 android:inputType="textMultiLine"
                                 android:maxLines="3"
                                 android:paddingStart="8dp"
@@ -126,6 +129,7 @@
                                 android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,7 +144,7 @@
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
                                 android:drawablePadding="16dp"
-                                android:hint="Where Lost?"
+                                android:hint="@string/where_lost"
                                 android:inputType="textMultiLine"
                                 android:maxLines="3"
                                 android:paddingStart="8dp"
@@ -148,6 +152,7 @@
                                 android:paddingBottom="1dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
                                 tools:text="@tools:sample/lorem/random" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,86 +163,36 @@
                             android:layout_marginTop="13dp"
                             android:backgroundTint="@color/lightest_shade"
                             android:drawablePadding="16dp"
+                            android:fontFamily="sans-serif-medium"
                             android:paddingStart="8dp"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
-                            android:text="SELECT IMAGES"
-                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/select_images"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="17sp" />
+                            android:textSize="17sp"
+                            tools:ignore="RtlSymmetry" />
 
                         <androidx.viewpager.widget.ViewPager
                             android:id="@+id/view_pager"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"/>
+                            android:layout_height="100dp" />
 
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/image_recycler"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="100dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:scrollbars="horizontal"-->
-<!--                            android:visibility="visible"-->
-<!--                            tools:listitem="@layout/images" />-->
-
-<!--                        <HorizontalScrollView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:fillViewport="true"-->
-<!--                            android:scrollbars="horizontal|vertical"-->
-<!--                            tools:ignore="SpeakableTextPresentCheck">-->
-
-<!--                            <LinearLayout-->
-<!--                                android:id="@+id/photos_horizontal"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="100dp">-->
-
-<!--                                <ImageView-->
-<!--                                    android:id="@+id/image1"-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:src="@drawable/resource_new" />-->
-
-<!--                                <ImageView-->
-<!--                                    android:id="@+id/image2"-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:src="@drawable/resource_new" />-->
-
-<!--                                <ImageView-->
-<!--                                    android:id="@+id/image3"-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:src="@drawable/resource_new" />-->
-
-<!--                                <ImageView-->
-<!--                                    android:id="@+id/image4"-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:src="@drawable/resource_new" />-->
-
-<!--                                <ImageView-->
-<!--                                    android:id="@+id/image5"-->
-<!--                                    android:layout_width="100dp"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:src="@drawable/resource_new" />-->
-<!--                            </LinearLayout>-->
-<!--                        </HorizontalScrollView>-->
                         <Button
                             android:id="@+id/post_lost_photo"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:backgroundTint="@color/lightest_shade"
                             android:drawablePadding="16dp"
-                            android:hint="Post Images"
+                            android:hint="@string/post_images"
                             android:paddingStart="8dp"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
                             android:textColor="#fff"
                             android:textColorHint="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="RtlSymmetry" />
+
                         <Button
                             android:id="@+id/Btn_post_lost_submit"
                             android:layout_width="match_parent"
@@ -248,7 +203,7 @@
                             android:gravity="center_horizontal"
                             android:paddingTop="12dp"
                             android:paddingBottom="12dp"
-                            android:text="Submit"
+                            android:text="@string/submit"
                             android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="16sp"
