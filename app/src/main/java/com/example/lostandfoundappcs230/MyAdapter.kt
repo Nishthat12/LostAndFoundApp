@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -21,11 +23,13 @@ class MyAdapter(private val context: Context, private val thingsList: ArrayList<
         val Image3: ImageView = itemView.findViewById(R.id.image3)
         val Image4: ImageView = itemView.findViewById(R.id.image4)
         val Image5: ImageView = itemView.findViewById(R.id.image5)
+        val lostBt: Button = itemView.findViewById(R.id.feed_found_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.lost_item_list, parent, false)
+
         return MyViewHolder(itemView)
     }
 
@@ -35,6 +39,10 @@ class MyAdapter(private val context: Context, private val thingsList: ArrayList<
         holder.Number.text = thingsList[position].phoneNumber
         holder.Message.text = thingsList[position].message
         holder.Where.text = thingsList[position].whereLost
+
+        holder.lostBt.setOnClickListener {
+            Toast.makeText(context,"clickedd",Toast.LENGTH_SHORT).show() 
+        }
 
         Glide.with(context)
             .load(lostThing.image1URL).into(holder.Image1)

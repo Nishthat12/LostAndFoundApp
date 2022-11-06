@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lostandfoundappcs230.databinding.ActivityMainBinding
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var Signup_btn: Button
     private lateinit var Signin_btn: Button
+    private lateinit var ForgotPass: TextView
 
     @SuppressLint("CutPasteId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,13 @@ class MainActivity : AppCompatActivity() {
             // start the activity connect to the specified class
             startActivity(intent)
         }
+
+        ForgotPass = findViewById(R.id.forgot_password)
+        ForgotPass.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         Signin_btn = findViewById(R.id.signin_btn)
         binding.signinBtn.setOnClickListener {
             val email = binding.etLoginEmail.text.toString()

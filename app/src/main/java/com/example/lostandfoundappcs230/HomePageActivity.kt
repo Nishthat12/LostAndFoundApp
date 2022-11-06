@@ -1,40 +1,44 @@
 package com.example.lostandfoundappcs230
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.lostandfoundappcs230.databinding.ActivityHomepageactivityBinding
 
 class HomePageActivity : AppCompatActivity() {
     // define the global variable
     private lateinit var binding: ActivityHomepageactivityBinding
+    private lateinit var profileBt : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomepageactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(HomePage())
         supportActionBar?.hide() //hide the title bar
 
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.home_menu_item -> replaceFragment(HomePage())
-                R.id.profile_menu_item -> replaceFragment(ProfilePage())
-
-                else -> {
-                }
-            }
-            true
+        binding.PostLostCard.setOnClickListener {
+            val intent = Intent(this@HomePageActivity, Post_LostActivity::class.java)
+            startActivity(intent)
+        }
+        binding.PostFoundCard.setOnClickListener {
+            val intent = Intent(this, Post_FoundActivity::class.java)
+            startActivity(intent)
+        }
+        binding.FeedLostCard.setOnClickListener {
+            val intent = Intent(this, LostFeedActivity::class.java)
+            startActivity(intent)
+        }
+        binding.FeedFoundCard.setOnClickListener {
+            val intent = Intent(this, FoundFeedActivity::class.java)
+            startActivity(intent)
         }
 
-    }
+        binding.profileButton.setOnClickListener {
+            val intent = Intent(this, ProfilePageActivity::class.java)
+            startActivity(intent)
+        }
 
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.commit()
     }
 }

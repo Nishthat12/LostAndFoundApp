@@ -31,8 +31,6 @@ class Post_LostActivity : AppCompatActivity() {
     private var Image4Uri: Uri? = null
     private var Image5Uri: Uri? = null
 
-    private lateinit var username: String
-
     private lateinit var etName: EditText
     private lateinit var etPhoneNumber: EditText
     private lateinit var etMessage: EditText
@@ -88,7 +86,7 @@ class Post_LostActivity : AppCompatActivity() {
         //post photo button on click listener
         postPhotoBtn.setOnClickListener {
             if (Image1Uri != null || Image2Uri != null || Image3Uri != null || Image4Uri != null || Image5Uri != null)
-                uploadImage()
+                uploadImage(userID)
         }
 
         //uploads name etc data to firestore database
@@ -129,18 +127,18 @@ class Post_LostActivity : AppCompatActivity() {
                     binding.image3.setImageResource(R.drawable.resource_new)
                     binding.image4.setImageResource(R.drawable.resource_new)
                     binding.image5.setImageResource(R.drawable.resource_new)
+
+                    val intent = Intent(this, HomePageActivity::class.java)
+                    startActivity(intent)
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Failed to post", Toast.LENGTH_SHORT).show()
                 }
-
-            val intent = Intent(this, HomePageActivity::class.java)
-            startActivity(intent)
         }
     }
 
     //function to upload image firebase storage
-    private fun uploadImage() {
+    private fun uploadImage(userID:String) {
 //        shows a progress dialog
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Uploading Image...")
@@ -150,11 +148,11 @@ class Post_LostActivity : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val fileName = formatter.format(now)
-        val storage1 = FirebaseStorage.getInstance().getReference("images/$username/$fileName/1")
-        val storage2 = FirebaseStorage.getInstance().getReference("images/$username/$fileName/2")
-        val storage3 = FirebaseStorage.getInstance().getReference("images/$username/$fileName/3")
-        val storage4 = FirebaseStorage.getInstance().getReference("images/$username/$fileName/4")
-        val storage5 = FirebaseStorage.getInstance().getReference("images/$username/$fileName/5")
+        val storage1 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/1")
+        val storage2 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/2")
+        val storage3 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/3")
+        val storage4 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/4")
+        val storage5 = FirebaseStorage.getInstance().getReference("images/$userID/$fileName/5")
         if (Image1Uri != null) {
             storage1.putFile(Image1Uri!!)
                 .addOnSuccessListener {
@@ -307,7 +305,6 @@ class Post_LostActivity : AppCompatActivity() {
 
             val name = it.child("name").value
             val number = it.child("contactNumber").value
-            username = it.child("email").value.toString()
             etName.text = name.toString().toEditable()
             etPhoneNumber.text = number.toString().toEditable()
 

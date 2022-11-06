@@ -43,8 +43,6 @@ class SignUpActivity : AppCompatActivity() {
             selectImage()
         }
 
-
-
         binding.btUpload.setOnClickListener {
             val rollNumber = binding.etRollno.text.toString()
             if (rollNumber.isNotEmpty()){
@@ -63,14 +61,13 @@ class SignUpActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             val rollNumber = binding.etRollno.text.toString()
-            val repassword = binding.etRepeatPassword.text.toString()
+            val rePassword = binding.etRepeatPassword.text.toString()
             val name = binding.etName.text.toString()
             val contactNumber = binding.etNumber.text.toString()
 
             if (email.endsWith(emailString)) {
-                if (email.isNotEmpty() && password.isNotEmpty() && repassword.isNotEmpty() && name.isNotEmpty() && rollNumber.isNotEmpty() && contactNumber.isNotEmpty()) {
-                    if (password == repassword) {
-                        if (profileUri != null) {
+                if (email.isNotEmpty() && password.isNotEmpty() && rePassword.isNotEmpty() && name.isNotEmpty() && rollNumber.isNotEmpty() && contactNumber.isNotEmpty()) {
+                    if (password == rePassword) {
                             firebaseAuth.createUserWithEmailAndPassword(email, password)
                                 .addOnCompleteListener { authResultTask ->
                                     if (authResultTask.isSuccessful) {
@@ -123,19 +120,13 @@ class SignUpActivity : AppCompatActivity() {
                                         ).show()
                                     }
                                 }
-                        } else {
-                            Toast.makeText(
-                                this, "Please Select a profile Photo", Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
                     } else {
                         Toast.makeText(
                             this, "Password is not matching", Toast.LENGTH_SHORT
                         ).show()
                     }
                 } else {
-                    Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Empty Fields are Not Allowed", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(
@@ -153,7 +144,7 @@ class SignUpActivity : AppCompatActivity() {
         progressDialog.show()
 
         val storage =
-            FirebaseStorage.getInstance().getReference("profileImages/$rollNumber/profilePic")
+            FirebaseStorage.getInstance().getReference("profileImages/$rollNumber")
         storage.putFile(profileUri!!).addOnSuccessListener {
             Toast.makeText(this@SignUpActivity, "Image uploaded", Toast.LENGTH_SHORT).show()
             storage.downloadUrl.addOnSuccessListener {
