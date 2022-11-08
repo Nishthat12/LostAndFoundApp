@@ -1,12 +1,10 @@
 package com.example.lostandfoundappcs230
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.example.lostandfoundappcs230.databinding.ActivityProfilePageBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lostandfoundappcs230.databinding.ActivityUpdatePassBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference

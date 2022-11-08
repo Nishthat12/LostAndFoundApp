@@ -45,9 +45,9 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btUpload.setOnClickListener {
             val rollNumber = binding.etRollno.text.toString()
-            if (rollNumber.isNotEmpty()){
+            if (rollNumber.isNotEmpty()) {
                 uploadImage(rollNumber)
-            }else{
+            } else {
                 Toast.makeText(
                     this,
                     "Empty Fields are not allowed",
@@ -68,58 +68,58 @@ class SignUpActivity : AppCompatActivity() {
             if (email.endsWith(emailString)) {
                 if (email.isNotEmpty() && password.isNotEmpty() && rePassword.isNotEmpty() && name.isNotEmpty() && rollNumber.isNotEmpty() && contactNumber.isNotEmpty()) {
                     if (password == rePassword) {
-                            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener { authResultTask ->
-                                    if (authResultTask.isSuccessful) {
-                                        val user = User(
-                                            name,
-                                            rollNumber,
-                                            email,
-                                            password,
-                                            contactNumber,
-                                            profileUrl
-                                        )
-                                        val uid = firebaseAuth.currentUser?.uid
-                                        if (uid != null) {
-                                            databaseReference.child(uid).setValue(user)
-                                                .addOnCompleteListener {
-                                                    if (it.isSuccessful) {
-                                                        Toast.makeText(
-                                                            this,
-                                                            "Registered Successfully",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
-                                                    } else {
-                                                        Toast.makeText(
-                                                            this,
-                                                            "Failed to Register",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
-                                                    }
+                        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener { authResultTask ->
+                                if (authResultTask.isSuccessful) {
+                                    val user = User(
+                                        name,
+                                        rollNumber,
+                                        email,
+                                        password,
+                                        contactNumber,
+                                        profileUrl
+                                    )
+                                    val uid = firebaseAuth.currentUser?.uid
+                                    if (uid != null) {
+                                        databaseReference.child(uid).setValue(user)
+                                            .addOnCompleteListener {
+                                                if (it.isSuccessful) {
+                                                    Toast.makeText(
+                                                        this,
+                                                        "Registered Successfully",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                } else {
+                                                    Toast.makeText(
+                                                        this,
+                                                        "Failed to Register",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
                                                 }
-                                        }
-                                        firebaseAuth.currentUser?.sendEmailVerification()
-                                            ?.addOnSuccessListener {
-                                                Toast.makeText(
-                                                    this,
-                                                    "Please verify your email!",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
-                                                val intent = Intent(this, MainActivity::class.java)
-                                                startActivity(intent)
-                                            }?.addOnFailureListener {
-                                                Toast.makeText(
-                                                    this, it.toString(), Toast.LENGTH_SHORT
-                                                ).show()
                                             }
-                                    } else {
-                                        Toast.makeText(
-                                            this,
-                                            authResultTask.exception.toString(),
-                                            Toast.LENGTH_SHORT
-                                        ).show()
                                     }
+                                    firebaseAuth.currentUser?.sendEmailVerification()
+                                        ?.addOnSuccessListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Please verify your email!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            val intent = Intent(this, MainActivity::class.java)
+                                            startActivity(intent)
+                                        }?.addOnFailureListener {
+                                            Toast.makeText(
+                                                this, it.toString(), Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        authResultTask.exception.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
+                            }
                     } else {
                         Toast.makeText(
                             this, "Password is not matching", Toast.LENGTH_SHORT
@@ -133,7 +133,6 @@ class SignUpActivity : AppCompatActivity() {
                     this, "Use your IITP Webmail address only", Toast.LENGTH_SHORT
                 ).show()
             }
-//        }
         }
     }
 

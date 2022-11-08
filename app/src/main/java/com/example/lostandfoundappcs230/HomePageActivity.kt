@@ -3,14 +3,12 @@ package com.example.lostandfoundappcs230
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lostandfoundappcs230.databinding.ActivityHomepageactivityBinding
 
 class HomePageActivity : AppCompatActivity() {
     // define the global variable
     private lateinit var binding: ActivityHomepageactivityBinding
-    private lateinit var profileBt : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

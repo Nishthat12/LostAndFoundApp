@@ -7,11 +7,12 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.lostandfoundappcs230.databinding.ActivityPostLostBinding
 import com.example.lostandfoundappcs230.databinding.ActivityProfilePageBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 class ProfilePageActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class ProfilePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfilePageBinding
     private lateinit var database: DatabaseReference
     private lateinit var storage: FirebaseStorage
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var profile_name: TextView
     private lateinit var profile_rollno: TextView
@@ -31,7 +33,8 @@ class ProfilePageActivity : AppCompatActivity() {
         binding = ActivityProfilePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+        auth = FirebaseAuth.getInstance()
+        val userID = auth.currentUser!!.uid
         readData(userID)
 
         profile_name = findViewById(R.id.user_profile_name)
@@ -46,7 +49,7 @@ class ProfilePageActivity : AppCompatActivity() {
         }
 
         binding.myPosts.setOnClickListener {
-            val intent = Intent(this, MyPostsActivity::class.java)
+            val intent = Intent(this, MyLostPostsActivity::class.java)
             startActivity(intent)
         }
 
@@ -56,6 +59,7 @@ class ProfilePageActivity : AppCompatActivity() {
         }
 
         binding.logout.setOnClickListener {
+            Firebase.auth.signOut()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

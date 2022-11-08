@@ -4,46 +4,43 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MyAdapter(private val context: Context, private val thingsList: ArrayList<Things>) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyLostItemsAdapter(
+    private val context: Context,
+    private val myLostThingsList: ArrayList<Things>
+) :
+    RecyclerView.Adapter<MyLostItemsAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val Name: TextView = itemView.findViewById(R.id.feed_name)
-        val Number: TextView = itemView.findViewById(R.id.feed_number)
-        val Message: TextView = itemView.findViewById(R.id.feed_message)
-        val Where: TextView = itemView.findViewById(R.id.feed_where)
+        val Name: TextView = itemView.findViewById(R.id.my_lost_name)
+        val Number: TextView = itemView.findViewById(R.id.my_lost_number)
+        val Message: TextView = itemView.findViewById(R.id.my_lost_message)
+        val Where: TextView = itemView.findViewById(R.id.my_lost_where)
         val Image1: ImageView = itemView.findViewById(R.id.image1)
         val Image2: ImageView = itemView.findViewById(R.id.image2)
         val Image3: ImageView = itemView.findViewById(R.id.image3)
         val Image4: ImageView = itemView.findViewById(R.id.image4)
         val Image5: ImageView = itemView.findViewById(R.id.image5)
-        val lostBt: Button = itemView.findViewById(R.id.feed_found_button)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.lost_item_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.my_lost_items, parent, false)
 
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val lostThing = thingsList[position]
-        holder.Name.text = thingsList[position].name
-        holder.Number.text = thingsList[position].phoneNumber
-        holder.Message.text = thingsList[position].message
-        holder.Where.text = thingsList[position].whereLost
-
-        holder.lostBt.setOnClickListener {
-            Toast.makeText(context,"clickedd $position",Toast.LENGTH_SHORT).show()
-        }
+        val lostThing = myLostThingsList[position]
+        holder.Name.text = myLostThingsList[position].name
+        holder.Number.text = myLostThingsList[position].phoneNumber
+        holder.Message.text = myLostThingsList[position].message
+        holder.Where.text = myLostThingsList[position].whereLost
 
         Glide.with(context)
             .load(lostThing.image1URL).into(holder.Image1)
@@ -58,6 +55,6 @@ class MyAdapter(private val context: Context, private val thingsList: ArrayList<
     }
 
     override fun getItemCount(): Int {
-        return thingsList.size
+        return myLostThingsList.size
     }
 }

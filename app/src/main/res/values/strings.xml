@@ -39,4 +39,10 @@
     <string name="claim">Claim !</string>
     <string name="i_found_it">I found It!</string>
     <string name="please_upload_image_before_submitting">Please Upload Image before submitting</string>
+    <string name="found_items">Found Items</string>
+    <string name="lost_items">Lost Items</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="email_id">Email ID</string>
+    <string name="new_password">New Password</string>
+    <string name="reset">Reset</string>
 </resources>

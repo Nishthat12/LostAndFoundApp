@@ -23,7 +23,7 @@ class LostFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lost_feed)
 
-        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView = findViewById(R.id.recycler_view_lost_feed)
         recyclerView.layoutManager = LinearLayoutManager(this@LostFeedActivity)
 
         thingsList = arrayListOf()
@@ -37,7 +37,7 @@ class LostFeedActivity : AppCompatActivity() {
         db.collection("Lost Items").get().addOnSuccessListener {
             if (!it.isEmpty) {
                 for (data in it.documents) {
-                    db.collection("user").document()
+//                    db.collection("user").document()
                     val thing: Things? = data.toObject(Things::class.java)
                     if (thing != null) {
                         thingsList.add(thing)

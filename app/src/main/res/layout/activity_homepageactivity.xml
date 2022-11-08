@@ -7,7 +7,6 @@
     tools:context=".HomePageActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -89,18 +88,20 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/darkest_shade"
-            android:drawableTop="@drawable/ic_baseline_home_24"/>
+            android:drawableTop="@drawable/ic_baseline_home_24" />
 
         <Button
             android:id="@+id/profile_button"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
             android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:backgroundTint="@color/greyy"
-            android:drawableTop="@drawable/ic_baseline_person_24"/>
+            android:drawableTop="@drawable/ic_baseline_person_24" />
     </LinearLayout>
 
 

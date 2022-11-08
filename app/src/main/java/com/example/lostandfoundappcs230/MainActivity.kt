@@ -1,6 +1,5 @@
 package com.example.lostandfoundappcs230
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var Signin_btn: Button
     private lateinit var ForgotPass: TextView
 
-    @SuppressLint("CutPasteId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE) //will hide the title
         supportActionBar?.hide() //hide the title bar

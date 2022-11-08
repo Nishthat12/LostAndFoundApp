@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -21,6 +23,7 @@ class LostThingsAdapter(private val context: Context, private val thingsList: Ar
         val Image3: ImageView = itemView.findViewById(R.id.image3_found)
         val Image4: ImageView = itemView.findViewById(R.id.image4_found)
         val Image5: ImageView = itemView.findViewById(R.id.image5_found)
+        val foundBt: Button = itemView.findViewById(R.id.claim_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -35,6 +38,12 @@ class LostThingsAdapter(private val context: Context, private val thingsList: Ar
         holder.Number.text = thingsList[position].phoneNumber
         holder.Message.text = thingsList[position].message
         holder.Where.text = thingsList[position].whereLost
+
+        holder.Message.canScrollVertically(1)
+
+        holder.foundBt.setOnClickListener {
+            Toast.makeText(context,"clickedd $position", Toast.LENGTH_SHORT).show()
+        }
 
         Glide.with(context)
             .load(foundThing.image1URL).into(holder.Image1)
