@@ -10,9 +10,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.messaging.FirebaseMessaging
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyAdapter(private val context: Context, private val thingsList: ArrayList<Things>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
+    private lateinit var apiService: APIService
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val Name: TextView = itemView.findViewById(R.id.feed_name)
@@ -40,10 +51,27 @@ class MyAdapter(private val context: Context, private val thingsList: ArrayList<
         holder.Number.text = thingsList[position].phoneNumber
         holder.Message.text = thingsList[position].message
         holder.Where.text = thingsList[position].whereLost
+        val userID = thingsList[position].userID
+
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
 
         holder.lostBt.setOnClickListener {
-            Toast.makeText(context,"clickedd $position",Toast.LENGTH_SHORT).show()
+            FirebaseDatabase.getInstance().reference.child("Tokens").child(userID!!).child("token")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val usertoken: String = snapshot.getValue(String::class.java).toString()
+                        sendNotification(
+                            usertoken,
+                            "Lost and Found App",
+                            "Someone found your lost item!"
+                        )
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
         }
+        updateToken()
 
         Glide.with(context)
             .load(lostThing.image1URL).into(holder.Image1)
@@ -55,6 +83,35 @@ class MyAdapter(private val context: Context, private val thingsList: ArrayList<
             .load(lostThing.image4URL).into(holder.Image4)
         Glide.with(context)
             .load(lostThing.image5URL).into(holder.Image5)
+    }
+
+    private fun updateToken(){
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val token: String? = it.result
+                    val userID = FirebaseAuth.getInstance().currentUser!!.uid
+                    FirebaseDatabase.getInstance().getReference("Tokens").child(userID).child("token").setValue(token)
+                }
+            }
+    }
+
+    private fun sendNotification(usertoken:String,title: String,message: String){
+        val data=Data(title,message)
+        val sender= NotificationSender(data,usertoken)
+        apiService.sendNotifcation(sender)!!.enqueue(object : Callback<MyResponse?> {
+
+            override fun onResponse(call: Call<MyResponse?>, response: Response<MyResponse?>) {
+                if (response.code() == 200) {
+                    if (response.body()!!.success != 1) {
+                        Toast.makeText(context, "Failed ", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MyResponse?>, t: Throwable) {
+            }
+        })
     }
 
     override fun getItemCount(): Int {

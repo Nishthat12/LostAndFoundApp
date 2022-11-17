@@ -11,6 +11,7 @@ import com.example.lostandfoundappcs230.databinding.ActivitySignupactivityBindin
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 
 class SignUpActivity : AppCompatActivity() {
@@ -105,6 +106,8 @@ class SignUpActivity : AppCompatActivity() {
                                                 "Please verify your email!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
+
+                                            retrieveAndStoreToken()
                                             val intent = Intent(this, MainActivity::class.java)
                                             startActivity(intent)
                                         }?.addOnFailureListener {
@@ -162,6 +165,19 @@ class SignUpActivity : AppCompatActivity() {
         intent.action = Intent.ACTION_GET_CONTENT
 
         startActivityForResult(intent, 1)
+    }
+
+    private fun retrieveAndStoreToken() {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val token: String? = it.result
+                    val userID = FirebaseAuth.getInstance().currentUser!!.uid
+                    FirebaseDatabase.getInstance().getReference("Tokens").child(userID).child("token")
+                        .setValue(token)
+                }
+            }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

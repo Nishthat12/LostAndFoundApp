@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lostandfoundappcs230.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                         if (it.isSuccessful) {
                             val verification = firebaseAuth.currentUser?.isEmailVerified
                             if (verification == true) {
+                                retrieveAndStoreToken()
                                 val intent = Intent(this, HomePageActivity::class.java)
                                 startActivity(intent)
                                 finish()
@@ -68,6 +71,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show()
             }
         }
+
+    }
+
+    private fun retrieveAndStoreToken() {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val token: String? = it.result
+                    val userID = FirebaseAuth.getInstance().currentUser!!.uid
+                    FirebaseDatabase.getInstance().getReference("Tokens").child(userID).child("token")
+                        .setValue(token)
+                }
+            }
 
     }
 }

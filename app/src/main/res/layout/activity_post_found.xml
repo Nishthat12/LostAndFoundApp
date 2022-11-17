@@ -144,7 +144,7 @@
                                 android:layout_height="90dp"
                                 android:autofillHints="Message"
                                 android:drawablePadding="16dp"
-                                android:hint="@string/where_lost"
+                                android:hint="@string/where_found"
                                 android:inputType="textMultiLine"
                                 android:maxLines="3"
                                 android:paddingStart="8dp"

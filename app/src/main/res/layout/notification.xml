@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/notification_app_logo"
+            android:layout_width="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="70dp"
+            android:src="@drawable/lost_and_found__1_"/>
+
+        <TextView
+            android:id="@+id/notification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/notification_app_logo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/notification_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is description"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/notification_app_logo"
+            android:layout_below="@+id/notification_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

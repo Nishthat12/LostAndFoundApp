@@ -60,10 +60,17 @@ class ProfilePageActivity : AppCompatActivity() {
 
         binding.logout.setOnClickListener {
             Firebase.auth.signOut()
+            clearToken(userID)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun clearToken(userID: String){
+        FirebaseDatabase.getInstance().getReference("tokens").child(userID)
+            .removeValue()
+
     }
 
     private fun readData(userID:String) {

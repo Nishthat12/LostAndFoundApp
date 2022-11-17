@@ -110,7 +110,8 @@ class Post_LostActivity : AppCompatActivity() {
                 "image2URL" to image2url,
                 "image3URL" to image3url,
                 "image4URL" to image4url,
-                "image5URL" to image5url
+                "image5URL" to image5url,
+                "userID" to userID
             )
             //collects data and adds to firestore
             db.collection("user").document(userID).collection("Lost Items").document(fileName)

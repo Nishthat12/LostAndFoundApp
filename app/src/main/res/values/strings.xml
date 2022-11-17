@@ -45,4 +45,5 @@
     <string name="email_id">Email ID</string>
     <string name="new_password">New Password</string>
     <string name="reset">Reset</string>
+    <string name="where_found">Where Found?</string>
 </resources>

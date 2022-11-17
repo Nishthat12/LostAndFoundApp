@@ -10,4 +10,5 @@ data class Things(
     val image3URL: String? = null,
     val image4URL: String? = null,
     val image5URL: String? = null,
+    val userID: String? = null
 )
