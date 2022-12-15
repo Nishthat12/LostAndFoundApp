@@ -1,6 +1,6 @@
 # Lost & Found App
 
-This is a lost and found app to post items and report found items.
+This is a lost and found app to post lost items and report found items.
 
 ## Description
 
