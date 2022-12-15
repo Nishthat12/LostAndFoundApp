@@ -58,21 +58,27 @@ class LostThingsAdapter(private val context: Context, private val thingsList: Ar
         holder.Message.canScrollVertically(1)
 
         holder.foundBt.setOnClickListener {
+            val oguserID = FirebaseAuth.getInstance().currentUser!!.uid
+            var name:String? = null
+            var number:String? = null
+            FirebaseDatabase.getInstance().getReference("Users").child(oguserID).get().addOnSuccessListener {
+                name = it.child("name").value.toString()
+                number = it.child("contactNumber").value.toString()
+            }
             FirebaseDatabase.getInstance().reference.child("Tokens").child(userID!!).child("token")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val usertoken: String = snapshot.getValue(String::class.java).toString()
                         sendNotification(
                             usertoken,
-                            "Lost and Found App",
-                            "Someone wants to claim an item you found!"
+                            "Someone wants to claim an item you found!",
+                            "You can contact- $name \n Phone Number: $number"
                         )
                     }
 
                     override fun onCancelled(error: DatabaseError) {
                     }
                 })
-            Toast.makeText(context, "clickedd $position", Toast.LENGTH_SHORT).show()
         }
         updateToken()
 

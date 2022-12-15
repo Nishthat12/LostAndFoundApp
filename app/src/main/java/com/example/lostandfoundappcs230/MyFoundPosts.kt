@@ -17,6 +17,7 @@ class MyFoundPosts : AppCompatActivity() {
     private lateinit var lostPostsBtn: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var thingsList: ArrayList<Things>
+    private lateinit var thingsIdList: ArrayList<String>
     private var db = Firebase.firestore
     private lateinit var homeBtn : Button
 
@@ -33,6 +34,7 @@ class MyFoundPosts : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this@MyFoundPosts)
 
         thingsList = arrayListOf()
+        thingsIdList = arrayListOf()
 
         fetchData()
 
@@ -56,12 +58,16 @@ class MyFoundPosts : AppCompatActivity() {
         db.collection("user").document(userID).collection("Found Items").get()
             .addOnSuccessListener {
                 if (!it.isEmpty) {
+                    it.forEach {
+                        val docID = it.id
+                        thingsIdList.add(docID)
+                    }
                     for (data in it.documents) {
                         val things: Things? = data.toObject(Things::class.java)
                         if (things != null) {
                             thingsList.add(things)
                         }
-                        recyclerView.adapter = MyFoundItemsAdapter(this, thingsList)
+                        recyclerView.adapter = MyFoundItemsAdapter(this, thingsList,thingsIdList)
                     }
                 }
             }.addOnFailureListener {

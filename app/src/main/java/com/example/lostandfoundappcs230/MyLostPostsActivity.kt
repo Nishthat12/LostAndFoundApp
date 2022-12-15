@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 class MyLostPostsActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var thingsList: ArrayList<Things>
+    private lateinit var thingsIdList: ArrayList<String>
     private lateinit var FoundItemsBtn : Button
     private lateinit var HomeBtn : Button
     private var db = Firebase.firestore
@@ -39,6 +40,7 @@ class MyLostPostsActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this@MyLostPostsActivity)
 
         thingsList = arrayListOf()
+        thingsIdList = arrayListOf()
 
         fetchData()
 
@@ -47,16 +49,20 @@ class MyLostPostsActivity : AppCompatActivity() {
     private fun fetchData() {
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         db = FirebaseFirestore.getInstance()
-        db.collection("user").document(userID).collection("Lost Items").get().addOnSuccessListener {
-            if (!it.isEmpty) {
-                for (data in it.documents) {
-                    db.collection("user").document()
+        db.collection("user").document(userID).collection("Lost Items").get().addOnSuccessListener { querySnapshot ->
+            if (!querySnapshot.isEmpty) {
+                querySnapshot.forEach {
+                    val docID = it.id
+                    thingsIdList.add(docID)
+                }
+                for (data in querySnapshot.documents) {
+//                    db.collection("user").document()
                     val thing: Things? = data.toObject(Things::class.java)
                     if (thing != null) {
                         thingsList.add(thing)
                     }
                 }
-                recyclerView.adapter = MyLostItemsAdapter(this, thingsList)
+                recyclerView.adapter = MyLostItemsAdapter(this, thingsList, thingsIdList)
             }
         }.addOnFailureListener {
             Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()

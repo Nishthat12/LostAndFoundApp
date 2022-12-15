@@ -56,14 +56,21 @@ class MyAdapter(private val context: Context, private val thingsList: ArrayList<
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
 
         holder.lostBt.setOnClickListener {
+            val oguserID = FirebaseAuth.getInstance().currentUser!!.uid
+            var name:String? = null
+            var number:String? = null
+            FirebaseDatabase.getInstance().getReference("Users").child(oguserID).get().addOnSuccessListener {
+                name = it.child("name").value.toString()
+                number = it.child("contactNumber").value.toString()
+            }
             FirebaseDatabase.getInstance().reference.child("Tokens").child(userID!!).child("token")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val usertoken: String = snapshot.getValue(String::class.java).toString()
                         sendNotification(
                             usertoken,
-                            "Lost and Found App",
-                            "Someone found your lost item!"
+                            "Someone found your lost item!",
+                            "You can contact- $name \n Phone Number: $number"
                         )
                     }
 

@@ -18,7 +18,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
@@ -27,16 +26,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         etMail = findViewById(R.id.forgot_email)
         etPass = findViewById(R.id.forgot_pass_password)
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+//        val userID = FirebaseAuth.getInstance().currentUser!!.uid
         btResetPass = findViewById(R.id.Btn_reset_pass)
         auth = FirebaseAuth.getInstance()
 
         btResetPass.setOnClickListener {
-            FirebaseAuth.getInstance().currentUser!!.updatePassword(etPass.text.toString())
-                .addOnSuccessListener {
-                    databaseReference.child(userID).child("password")
-                        .setValue(etPass.text.toString())
-                }
+//            FirebaseAuth.getInstance().currentUser!!.updatePassword(etPass.text.toString())
+//                .addOnSuccessListener {
+////                    databaseReference.child(userID).child("password")
+////                        .setValue(etPass.text.toString())
+//                }
             val mail = etMail.text.toString()
             auth.sendPasswordResetEmail(mail).addOnSuccessListener {
                 Toast.makeText(this, "Check your mail!", Toast.LENGTH_SHORT).show()

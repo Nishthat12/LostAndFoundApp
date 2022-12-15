@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:elevation="0dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/PostFoundLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/post_found"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="50"
+                            android:background="@color/darkest_shade"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Edit Post For Found Item"
+                            android:textAlignment="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="25sp"
+                            tools:ignore="InefficientWeight,TextContrastCheck" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/PostLostLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/PostFoundLayout"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <EditText
+                                android:id="@+id/post_found_edit_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:autofillHints="Name"
+                                android:drawablePadding="15dp"
+                                android:hint="@string/name"
+                                android:inputType="textEmailAddress"
+                                android:maxLines="1"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:scaleType="centerCrop"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
+                                tools:text="@tools:sample/cities" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <EditText
+                                android:id="@+id/post_found_edit_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:autofillHints="Phone Number"
+                                android:drawablePadding="16dp"
+                                android:hint="@string/phone_number"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
+                                tools:text="@tools:sample/us_phones" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <EditText
+                                android:id="@+id/post_found_edit_message"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:autofillHints="Message"
+                                android:drawablePadding="16dp"
+                                android:hint="@string/message"
+                                android:inputType="textMultiLine"
+                                android:maxLines="3"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
+                                tools:text="@tools:sample/lorem/random" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <EditText
+                                android:id="@+id/post_found_edit_where"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:autofillHints="Message"
+                                android:drawablePadding="16dp"
+                                android:hint="@string/where_found"
+                                android:inputType="textMultiLine"
+                                android:maxLines="3"
+                                android:paddingStart="8dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="1dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                tools:ignore="RtlSymmetry"
+                                tools:text="@tools:sample/lorem/random" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/post_found_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="13dp"
+                            android:background="@color/greyy"
+                            android:text="@string/select_images"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fillViewport="true"
+                            android:scrollbars="horizontal|vertical"
+                            tools:ignore="SpeakableTextPresentCheck">
+
+                            <LinearLayout
+                                android:id="@+id/photos_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:id="@+id/image1_found_edit"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_1"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image2_found_edit"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_2"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image3_found_edit"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_3"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image4_found_edit"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_4"
+                                    android:src="@drawable/resource_new" />
+
+                                <ImageView
+                                    android:id="@+id/image5_found_edit"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/lost_item_image_5"
+                                    android:src="@drawable/resource_new" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                        <Button
+                            android:id="@+id/post_found_edit_photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="13dp"
+                            android:backgroundTint="@color/lightest_shade"
+                            android:drawablePadding="16dp"
+                            android:hint="@string/upload_images"
+                            android:paddingStart="8dp"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:textColor="#fff"
+                            android:textColorHint="@color/black"
+                            android:textSize="16sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:id="@+id/note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/please_upload_images_before_clicking_submit"
+                            android:textAlignment="center"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/Btn_post_found_edit_submit"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="50"
+                            android:backgroundTint="@color/darkest_shade"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:text="@string/submit"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
